@@ -246,5 +246,22 @@
   "ui.f9c2916783": "⚠️ Deine Sitzung ist abgelaufen. Melde dich erneut an, um einen Anspruch einzureichen.",
   "ui.fa9ac84094": "Kauf abgebrochen — es wurde nichts berechnet.",
   "ui.ff50632acd": "Status gespeichert",
-  "ui.fff03ac4ba": "Deine Kontodaten konnten nicht exportiert werden."
+  "ui.fff03ac4ba": "Deine Kontodaten konnten nicht exportiert werden.",
+  "about.mission.eu.title": "Europäische Infrastruktur",
+  "about.mission.eu.body": "Deine Seite, Dateien und Daten laufen auf europäischen Servern. Keine amerikanische Cloud, kein Weiterverkauf, nach europäischem Recht.",
+  "about.mission.trackers.title": "Null Tracker",
+  "about.mission.trackers.body": "Keine Werbepixel, keine Cookie-Wand, kein Fingerprinting. Besucher deines Profils werden nicht verfolgt, auch nicht von uns.",
+  "about.mission.privacy.title": "Privatsphäre zuerst",
+  "about.mission.privacy.body": "SecureShield verbirgt deine echte E-Mail-Adresse und du entscheidest, was öffentlich ist. Exportiere oder lösche deine Daten mit einem Klick.",
+  "about.mission.identity.title": "Souveräne Identität",
+  "about.mission.identity.body": "Ein Name, ein sauberer Link, von Menschen verifiziert. Deine Identität gehört dir und zieht mit auf deine eigene Domain.",
+  "about.invitedBy": "Eingeladen von @{{handle}}",
+  "save.explain.session_expired": "Abgelehnt, weil deine Sitzung abgelaufen ist. Melde dich erneut an und versuche es dann noch einmal.",
+  "save.explain.validation_failed": "Eine deiner Einstellungen konnte nicht geprüft werden. Passe das zuletzt geänderte Element an und versuche es erneut.",
+  "save.explain.db_unavailable": "Es gibt ein vorübergehendes Verbindungsproblem mit der Datenbank.",
+  "save.explain.db_timeout": "Die Datenbank hat zu langsam reagiert. Deine Änderungen sind noch bereit.",
+  "save.explain.conflict": "Dein Profil wurde inzwischen an anderer Stelle geändert. Wir übernehmen die neueste Version und speichern erneut.",
+  "save.explain.network": "Dein Gerät hat keine Verbindung zu ROUT. Prüfe dein Internet.",
+  "save.explain.unknown": "Beim Speichern ist unerwartet etwas schiefgelaufen.",
+  "save.noConnection": "keine Verbindung"
 }

@@ -246,5 +246,22 @@
   "ui.f9c2916783": "⚠️ Ta session a expiré. Reconnecte-toi pour soumettre une réservation.",
   "ui.fa9ac84094": "Achat annulé — rien n’a été facturé.",
   "ui.ff50632acd": "Statut enregistré",
-  "ui.fff03ac4ba": "Impossible d’exporter les données de ton compte."
+  "ui.fff03ac4ba": "Impossible d’exporter les données de ton compte.",
+  "about.mission.eu.title": "Infrastructure européenne",
+  "about.mission.eu.body": "Ta page, tes fichiers et tes données tournent sur des serveurs européens. Pas de cloud américain, pas de revente, sous droit européen.",
+  "about.mission.trackers.title": "Zéro traceur",
+  "about.mission.trackers.body": "Pas de pixels publicitaires, pas de mur de cookies, pas d’empreinte numérique. Les visiteurs de ton profil ne sont pas suivis, même pas par nous.",
+  "about.mission.privacy.title": "La vie privée d’abord",
+  "about.mission.privacy.body": "SecureShield masque ta vraie adresse e-mail et tu décides de ce qui est public. Exporte ou efface tes données en un clic.",
+  "about.mission.identity.title": "Identité souveraine",
+  "about.mission.identity.body": "Un nom, un lien propre, vérifié par des humains. Ton identité t’appartient et te suit jusqu’à ton propre domaine.",
+  "about.invitedBy": "Invité par @{{handle}}",
+  "save.explain.session_expired": "Refusé car ta session a expiré. Reconnecte-toi puis réessaie.",
+  "save.explain.validation_failed": "L’un de tes paramètres n’a pas pu être vérifié. Modifie le dernier élément changé et réessaie.",
+  "save.explain.db_unavailable": "Il y a un problème de connexion temporaire avec la base de données.",
+  "save.explain.db_timeout": "La base de données a répondu trop lentement. Tes modifications sont toujours prêtes.",
+  "save.explain.conflict": "Ton profil a été modifié ailleurs entre-temps. Nous reprenons la version la plus récente et réenregistrons.",
+  "save.explain.network": "Ton appareil n’est pas connecté à ROUT. Vérifie ta connexion internet.",
+  "save.explain.unknown": "Une erreur inattendue s’est produite lors de l’enregistrement.",
+  "save.noConnection": "pas de connexion"
 }

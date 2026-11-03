@@ -246,5 +246,22 @@
   "ui.f9c2916783": "⚠️ Your session has expired. Sign in again to submit a claim.",
   "ui.fa9ac84094": "Purchase cancelled — nothing was charged.",
   "ui.ff50632acd": "Status saved",
-  "ui.fff03ac4ba": "Your account data could not be exported."
+  "ui.fff03ac4ba": "Your account data could not be exported.",
+  "about.mission.eu.title": "European infrastructure",
+  "about.mission.eu.body": "Your page, files and data run on European servers. No American cloud, no reselling, under European law.",
+  "about.mission.trackers.title": "Zero trackers",
+  "about.mission.trackers.body": "No ad pixels, no cookie wall, no fingerprinting. Visitors to your profile are not tracked, not even by us.",
+  "about.mission.privacy.title": "Privacy first",
+  "about.mission.privacy.body": "SecureShield hides your real e-mail address and you decide what is public. Export or erase your data with one click.",
+  "about.mission.identity.title": "Sovereign identity",
+  "about.mission.identity.body": "One name, one clean link, verified by people. Your identity is yours and moves with you to your own domain.",
+  "about.invitedBy": "Invited by @{{handle}}",
+  "save.explain.session_expired": "Rejected because your session expired. Sign in again and then try once more.",
+  "save.explain.validation_failed": "One of your settings could not be checked. Adjust the last changed item and try again.",
+  "save.explain.db_unavailable": "There is a temporary connection problem with the database.",
+  "save.explain.db_timeout": "The database responded too slowly. Your changes are still ready.",
+  "save.explain.conflict": "Your profile was changed elsewhere in the meantime. We take the newest version and save again.",
+  "save.explain.network": "Your device has no connection to ROUT. Check your internet.",
+  "save.explain.unknown": "Something unexpectedly went wrong while saving.",
+  "save.noConnection": "no connection"
 }

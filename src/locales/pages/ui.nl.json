@@ -246,5 +246,22 @@
   "ui.f9c2916783": "⚠️ Je sessie is verlopen. Log opnieuw in om een claim in te dienen.",
   "ui.fa9ac84094": "Aankoop geannuleerd — er is niets afgerekend.",
   "ui.ff50632acd": "Status opgeslagen",
-  "ui.fff03ac4ba": "Je accountgegevens konden niet geëxporteerd worden."
+  "ui.fff03ac4ba": "Je accountgegevens konden niet geëxporteerd worden.",
+  "about.mission.eu.title": "Europese infrastructuur",
+  "about.mission.eu.body": "Je pagina, bestanden en gegevens draaien op Europese servers. Geen Amerikaanse cloud, geen doorverkoop, onder Europees recht.",
+  "about.mission.trackers.title": "Nul trackers",
+  "about.mission.trackers.body": "Geen advertentiepixels, geen cookiemuur, geen fingerprinting. Bezoekers van je profiel worden niet gevolgd, ook niet door ons.",
+  "about.mission.privacy.title": "Privacy eerst",
+  "about.mission.privacy.body": "SecureShield verbergt je echte e-mailadres en je bepaalt zelf wat publiek is. Je data exporteer of wis je met één klik.",
+  "about.mission.identity.title": "Soevereine identiteit",
+  "about.mission.identity.body": "Eén naam, één schone link, geverifieerd door mensen. Je identiteit is van jou en verhuist mee naar je eigen domein.",
+  "about.invitedBy": "Uitgenodigd door @{{handle}}",
+  "save.explain.session_expired": "Geweigerd door verstreken sessie. Log opnieuw in en probeer het daarna nog eens.",
+  "save.explain.validation_failed": "Een van je instellingen kon niet worden gecontroleerd. Pas het laatst gewijzigde onderdeel aan en probeer opnieuw.",
+  "save.explain.db_unavailable": "Er is een tijdelijk verbindingsprobleem met de database.",
+  "save.explain.db_timeout": "De database reageerde te traag. Je wijzigingen staan nog klaar.",
+  "save.explain.conflict": "Je profiel werd ondertussen elders aangepast. We nemen de nieuwste versie over en slaan opnieuw op.",
+  "save.explain.network": "Je toestel heeft geen verbinding met ROUT. Controleer je internet.",
+  "save.explain.unknown": "Er ging onverwacht iets mis bij het opslaan.",
+  "save.noConnection": "geen verbinding"
 }

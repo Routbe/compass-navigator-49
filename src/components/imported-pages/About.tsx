@@ -31,10 +31,10 @@ import { Code2, Youtube, AtSign, Link2 } from "lucide-react";
  */
 
 const MISSION = [
-  { icon: Globe2, title: "Europese infrastructuur", body: "Je pagina, bestanden en gegevens draaien op Europese servers. Geen Amerikaanse cloud, geen doorverkoop, onder Europees recht." },
-  { icon: EyeOff, title: "Nul trackers", body: "Geen advertentiepixels, geen cookiemuur, geen fingerprinting. Bezoekers van je profiel worden niet gevolgd, ook niet door ons." },
-  { icon: Lock, title: "Privacy eerst", body: "SecureShield verbergt je echte e-mailadres en je bepaalt zelf wat publiek is. Je data exporteer of wis je met één klik." },
-  { icon: ShieldCheck, title: "Soevereine identiteit", body: "Eén naam, één schone link, geverifieerd door mensen. Je identiteit is van jou en verhuist mee naar je eigen domein." },
+  { icon: Globe2, title: "about.mission.eu.title", body: "about.mission.eu.body" },
+  { icon: EyeOff, title: "about.mission.trackers.title", body: "about.mission.trackers.body" },
+  { icon: Lock, title: "about.mission.privacy.title", body: "about.mission.privacy.body" },
+  { icon: ShieldCheck, title: "about.mission.identity.title", body: "about.mission.identity.body" },
 ] as const;
 
 const HANDLE_RE = /[^a-z0-9._-]/g;
@@ -366,7 +366,7 @@ export default function About({ stats = null, reviews = [] }: { stats?: Communit
     <AppLayout crumbs={[{ label: t("about.crumb") }]} trustBadges>
       {invitedBy && (
         <div className="mx-auto mt-3 w-fit rounded-full border border-border bg-muted px-4 py-1.5 text-xs font-medium">
-          Uitgenodigd door @{invitedBy}
+          {t("about.invitedBy", { handle: invitedBy })}
         </div>
       )}
       {/* pb-28 houdt de laatste CTA vrij van de footer en de zwevende knop */}
@@ -390,9 +390,9 @@ export default function About({ stats = null, reviews = [] }: { stats?: Communit
               <div>
                 <h2 className="flex items-center gap-3 font-serif text-2xl font-semibold tracking-tight text-foreground sm:text-4xl">
                   <m.icon className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" aria-hidden />
-                  {m.title}
+                  {t(m.title)}
                 </h2>
-                <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">{m.body}</p>
+                <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">{t(m.body)}</p>
               </div>
             </article>
           ))}
