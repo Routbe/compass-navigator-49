@@ -1,3 +1,4 @@
+import { i18n as trI18n } from "@/lib/i18n";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
@@ -695,7 +696,6 @@ async function createQr() {
 }`,
       python: `import os
 import requests
-import { i18n as trI18n } from "@/lib/i18n";
 
 ROUT_API = "${base}"
 
