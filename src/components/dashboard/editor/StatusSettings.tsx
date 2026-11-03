@@ -11,7 +11,7 @@ const pill = (on: boolean) =>
   cn("h-9 shrink-0 rounded-full border px-3 text-[11px] font-medium transition-colors", on ? "border-primary/50 bg-primary/10" : "border-border");
 
 /** Links tab: what the status says (dot state + short text). */
-export function StatusContentSettings({ prefs, setPref, bare = false }: { prefs: ProfileDisplayPrefs; setPref: SetPref; bare?: boolean }) {
+export function StatusContentSettings({ prefs, setPref, bare = false, part }: { prefs: ProfileDisplayPrefs; setPref: SetPref; bare?: boolean; part?: "indicator" | "message" }) {
   const { t } = useI18n();
   const useEmoji = prefs.presenceIndicator === "emoji";
   return (
@@ -20,8 +20,8 @@ export function StatusContentSettings({ prefs, setPref, bare = false }: { prefs:
         <h2 className="text-lg font-medium">{t("studio.status.title")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">{t("studio.status.help")}</p>
       </div>
-      <div className="space-y-2">
-        <p className="input-label">{t("studio.status.indicator")}</p>
+      {part !== "message" && <div className="space-y-2">
+        <p className={part ? "sr-only" : "input-label"}>{t("studio.status.indicator")}</p>
         <div className="flex flex-wrap gap-2">
           {PRESENCE_DEFS.map((p) => {
             const on = !useEmoji && prefs.presence === p.id;
@@ -49,12 +49,12 @@ export function StatusContentSettings({ prefs, setPref, bare = false }: { prefs:
             <Switch aria-label={t("studio.status.icon")} checked={prefs.presenceIndicator === "color_with_icon"} onCheckedChange={(on) => setPref("presenceIndicator", on ? "color_with_icon" : "color")} />
           </div>
         )}
-      </div>
-      <div className="space-y-1.5">
-        <p className="input-label">{t("studio.status.message")}</p>
+      </div>}
+      {part !== "indicator" && <div className="space-y-1.5">
+        <p className={part ? "sr-only" : "input-label"}>{t("studio.status.message")}</p>
         <Input value={prefs.statusLine ?? ""} maxLength={60} onChange={(e) => setPref("statusLine", e.target.value || null)} placeholder={t("studio.status.placeholder")} className="h-10 text-xs" />
         <p className="text-xs text-muted-foreground">{t("studio.status.length", { count: (prefs.statusLine ?? "").length })}</p>
-      </div>
+      </div>}
     </section>
   );
 }
