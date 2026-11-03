@@ -10,6 +10,7 @@ import { OfficialVerifyButton, hasOfficialVerify } from "@/components/studio/Off
 import type { BioProvider } from "@/lib/open-web-rules";
 import { VerifyOwnership } from "@/components/studio/VerifyOwnership";
 import { isBioVerifiable } from "@/lib/open-web-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const btn = "inline-flex h-8 items-center justify-center rounded-lg border border-border px-3 text-xs font-medium hover:bg-muted disabled:opacity-50";
 
@@ -42,7 +43,7 @@ export function LiveBlockSettings({ provider, stats, onStatsChange }: {
       await qc.invalidateQueries({ queryKey: ["my-integrations"] });
       toast.success(ok);
     } catch {
-      toast.error("Opslaan mislukt");
+      toast.error(trI18n.t("ui.f678834f2b"));
     } finally {
       setBusy(false);
     }
@@ -64,7 +65,7 @@ export function LiveBlockSettings({ provider, stats, onStatsChange }: {
           }}
         >
           <Input aria-label={`${label} gebruikersnaam`} placeholder="gebruikersnaam" value={handle} onChange={(e) => setHandle(e.target.value)} />
-          <button type="submit" disabled={busy || !handle.trim()} className={btn}>Koppelen</button>
+          <button type="submit" disabled={busy || !handle.trim()} className={btn}>{trI18n.t("ui.1f9b7663b7")}</button>
         </form>
       ) : (
         <div className="flex flex-wrap items-center gap-2">

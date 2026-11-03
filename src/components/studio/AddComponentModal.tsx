@@ -17,6 +17,7 @@ import { BLOCK_KINDS } from "@/lib/profile";
 import { SocialPlatformIcon } from "@/lib/social-icons";
 import { VideoBlockDialog } from "./VideoBlockDialog";
 import { ProUpgradeModal } from "./ProUpgradeModal";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Eén component uit de bibliotheek. `video` opent de embed/upload-keuze. */
 interface LibraryItem {
@@ -221,7 +222,7 @@ export function AddComponentModal({ open, onClose, onAdd, handle, onWidget }: Pr
       toast.success(`${label} staat op je profiel`);
       close();
     } catch {
-      toast.error("Toevoegen mislukt");
+      toast.error(trI18n.t("ui.cc2b708d99"));
     } finally {
       setBusy(null);
     }

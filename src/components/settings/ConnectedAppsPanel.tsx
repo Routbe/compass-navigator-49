@@ -16,6 +16,7 @@ import {
   revokeConnectedApp,
   setAppEmail,
 } from "@/lib/oauth/connected-apps.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const SOURCE_LABEL = { primary: "Primair", alias: "Contact-alias", relay: "Privé-relay" } as const;
 
@@ -64,7 +65,7 @@ export function ConnectedAppsPanel({ autoWizard = true }: { autoWizard?: boolean
     setBusy(clientId);
     try {
       await withStepUp(() => setEmail({ data: { clientId, choiceId } }));
-      toast.success("E-mailadres voor deze app bijgewerkt.");
+      toast.success(trI18n.t("ui.88b8cf2e50"));
       await refresh();
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Opslaan mislukt.");

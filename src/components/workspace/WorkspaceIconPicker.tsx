@@ -8,6 +8,7 @@ import { compressImageToWebP } from "@/lib/image-compression";
 import { WORKSPACE_ICONS, WORKSPACE_ICON_KEYS, resolveWorkspaceIcon, type WorkspaceIconKey } from "@/lib/workspace-icons";
 import { WorkspaceIcon } from "./WorkspaceIcon";
 import { cn } from "@/lib/utils";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
@@ -22,8 +23,8 @@ export function WorkspaceIconPicker({ value, category, onChange }: { value: Work
 
   const pick = async (file?: File) => {
     if (!file) return;
-    if (!ALLOWED.includes(file.type)) return void toast.error("Gebruik een JPG, PNG, WebP of GIF.");
-    if (file.size > 5 * 1024 * 1024) return void toast.error("Houd de afbeelding onder 5 MB.");
+    if (!ALLOWED.includes(file.type)) return void toast.error(trI18n.t("ui.287b4a51fd"));
+    if (file.size > 5 * 1024 * 1024) return void toast.error(trI18n.t("ui.c58410c3de"));
     setBusy(true);
     try {
       const blob: Blob = file.type === "image/gif" ? file : await compressImageToWebP(file, 400).catch(() => file);

@@ -8,6 +8,7 @@ import { useI18n } from "@/lib/i18n";
 import { previewAccountMerge, redeemAccountMerge, startAccountMerge } from "@/lib/account-merge.functions";
 import { cn } from "@/lib/utils";
 import { withStepUp } from "@/components/auth/StepUpDialog";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Role = "primary" | "secondary";
 type Side = "primary" | "secondary";
@@ -173,7 +174,7 @@ export function MergeAccountWizard() {
                 <p className="mt-1 font-mono text-3xl font-semibold tracking-[0.4em]">{ticket.pin}</p>
                 <Button variant="outline" size="sm" className="mt-3 gap-1.5" onClick={async () => {
                   await navigator.clipboard.writeText(ticket.pin);
-                  toast.success("Code gekopieerd");
+                  toast.success(trI18n.t("ui.72278bbfff"));
                 }}>
                   <Copy className="h-4 w-4" /> Kopiëren
                 </Button>

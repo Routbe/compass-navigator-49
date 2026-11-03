@@ -3,6 +3,7 @@ import { Bot, CheckCircle2, Copy, Terminal } from "lucide-react";
 import { toast } from "sonner";
 import { ConsoleCard, ConsolePage } from "@/components/console/ConsolePage";
 import { Button } from "@/components/ui/button";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const config = `{
   "mcpServers": {
@@ -26,7 +27,7 @@ function ConnectorsConsole() {
   return <ConsolePage title="AI & MCP Connectors" description="Connect Claude Desktop, Cursor and compatible agents to ROUT tools.">
     <div className="grid gap-4 lg:grid-cols-2">
       <ConsoleCard title="MCP configuration" description="Add this server block to your AI client, then restart it.">
-        <div className="relative"><pre className="overflow-x-auto border border-border bg-background p-4 text-xs leading-relaxed"><code>{config}</code></pre><Button size="icon" variant="ghost" className="absolute right-2 top-2" aria-label="Kopieer configuratie" onClick={() => { void navigator.clipboard.writeText(config); toast.success("Configuratie gekopieerd"); }}><Copy className="h-4 w-4" /></Button></div>
+        <div className="relative"><pre className="overflow-x-auto border border-border bg-background p-4 text-xs leading-relaxed"><code>{config}</code></pre><Button size="icon" variant="ghost" className="absolute right-2 top-2" aria-label="Kopieer configuratie" onClick={() => { void navigator.clipboard.writeText(config); toast.success(trI18n.t("ui.4fbfe74a73")); }}><Copy className="h-4 w-4" /></Button></div>
       </ConsoleCard>
       <ConsoleCard title="Compatible clients" description="Use the same ROUT server in each MCP-compatible desktop client.">
         <ul className="space-y-3 text-sm">{["Claude Desktop", "Cursor", "Custom MCP clients"].map((name) => <li key={name} className="flex items-center gap-3 border-b border-border pb-3 last:border-0"><CheckCircle2 className="h-4 w-4 text-accent" />{name}</li>)}</ul>

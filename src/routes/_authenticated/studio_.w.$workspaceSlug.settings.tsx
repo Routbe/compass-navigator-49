@@ -20,6 +20,7 @@ import { getActiveScopeStorage } from "@/lib/assets.functions";
 import { listWorkspaceAgentAudit } from "@/lib/agent/chronos.functions";
 import { canRevert } from "@/lib/agent/chronos";
 import { canManageTeam } from "@/lib/workspace-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_authenticated/studio_/w/$workspaceSlug/settings")({
   head: () => ({
@@ -137,7 +138,7 @@ function IconCard({ workspaceId, category, initial, onDone }: { workspaceId: str
   const dirty = value.icon !== initial.icon || value.avatarUrl !== initial.avatarUrl;
   async function submit() {
     setBusy(true);
-    try { await save({ data: { workspaceId, ...value } }); toast.success("Icoon bijgewerkt"); onDone(); }
+    try { await save({ data: { workspaceId, ...value } }); toast.success(trI18n.t("ui.a6ac242830")); onDone(); }
     catch (e) { toast.error(errText(e)); } finally { setBusy(false); }
   }
   return (
@@ -158,7 +159,7 @@ function GeneralCard({ ws, onDone }: { ws: WsSettings; onDone: () => void }) {
   const invalid = !trimmed || trimmed.length > 80;
   async function save() {
     setBusy(true);
-    try { await rename({ data: { workspaceId: ws.id, name } }); toast.success("Naam bijgewerkt"); onDone(); }
+    try { await rename({ data: { workspaceId: ws.id, name } }); toast.success(trI18n.t("ui.836def665a")); onDone(); }
     catch (e) { toast.error(errText(e)); } finally { setBusy(false); }
   }
   return (
@@ -193,7 +194,7 @@ function ChronosCard({ ws }: { ws: WsSettings }) {
         const body = (await res.json().catch(() => null)) as { error?: string } | null;
         throw new Error(body?.error ?? "Terugdraaien lukte niet.");
       }
-      toast.success("AI-actie teruggedraaid");
+      toast.success(trI18n.t("ui.ddc54f8be4"));
       void qc.invalidateQueries({ queryKey: ["chronos", ws.id] });
     } catch (e) { toast.error(errText(e)); } finally { setBusyId(null); }
   }
@@ -241,7 +242,7 @@ function DangerZone({ ws }: { ws: WsSettings }) {
     try {
       await del({ data: { workspaceId: ws.id, confirmation: confirm } });
       qc.clear();
-      toast.success("Workspace verwijderd");
+      toast.success(trI18n.t("ui.96f545e075"));
       void navigate({ to: "/studio/account", replace: true });
     } catch (e) { toast.error(errText(e)); } finally { setBusy(false); }
   }

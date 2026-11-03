@@ -18,6 +18,7 @@ import {
   clampGiftAmount,
   euro,
 } from "@/lib/gift-cards";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Publieke aankooppagina voor cadeaubonnen, met live 3D-voorbeeld. */
 export default function GiftCards() {
@@ -43,9 +44,9 @@ export default function GiftCards() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("status") === "success") {
-      toast.success("Bedankt! Je cadeaubon is onderweg per e-mail.");
+      toast.success(trI18n.t("ui.da3f0348fe"));
     } else if (params.get("status") === "cancelled") {
-      toast.info("Aankoop geannuleerd — er is niets afgerekend.");
+      toast.info(trI18n.t("ui.fa9ac84094"));
     }
   }, []);
 
@@ -56,7 +57,7 @@ export default function GiftCards() {
 
   async function submit() {
     if (!purchaserEmail) {
-      toast.error("Vul je eigen e-mailadres in voor de factuur.");
+      toast.error(trI18n.t("ui.b87e9329f9"));
       return;
     }
     setBusy(true);
@@ -87,7 +88,7 @@ export default function GiftCards() {
       }
       window.location.href = result.url;
     } catch {
-      toast.error("Aankoop mislukt. Probeer het opnieuw.");
+      toast.error(trI18n.t("ui.b6b7c6ec52"));
     } finally {
       setBusy(false);
     }

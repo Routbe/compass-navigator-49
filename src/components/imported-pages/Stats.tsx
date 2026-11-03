@@ -22,6 +22,7 @@ import { allocateSlug, shortLinkQrValue, shortLinkUrl } from "@/lib/short-links"
 import { useI18n } from "@/lib/i18n";
 import { formatDate, formatDateTime, formatNumber } from "@/lib/format";
 import { useAuth } from "@/hooks/useAuth";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Scan {
   scanned_at: string;
@@ -166,9 +167,9 @@ export default function Stats() {
   const copy = async (v: string) => {
     try {
       await navigator.clipboard.writeText(v);
-      toast.success("Copied");
+      toast.success(trI18n.t("ui.8e3df45a49"));
     } catch {
-      toast.error("Copy failed");
+      toast.error(trI18n.t("ui.bd5acbff63"));
     }
   };
 
@@ -223,7 +224,7 @@ export default function Stats() {
     if (!confirm("Regenerate the short link? Existing printed QR codes will stop working.")) return;
     const slug = await allocateSlug();
     if (!slug) {
-      toast.error("Could not generate a new short code");
+      toast.error(trI18n.t("ui.e44e6971eb"));
       return;
     }
     manage({ action: "regenerate_slug", slug }, "New short link generated");

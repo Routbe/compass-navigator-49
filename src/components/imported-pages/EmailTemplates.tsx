@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { BUNNY_URL, SITE_ORIGIN } from "@/lib/site";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Twee kant-en-klare, ultraschone HTML-mailtemplates in ROUT-huisstijl:
@@ -223,10 +224,10 @@ export default function EmailTemplatesPage() {
     try {
       await navigator.clipboard.writeText(html);
       setCopied(true);
-      toast.success("Raw HTML gekopieerd — plak in Infomaniak Mail (HTML-modus)");
+      toast.success(trI18n.t("ui.76ac1c84ac"));
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      toast.error("Kopiëren mislukt — selecteer de code handmatig");
+      toast.error(trI18n.t("ui.87b2ea9c1e"));
     }
   };
 

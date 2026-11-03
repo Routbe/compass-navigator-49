@@ -10,6 +10,7 @@ import { INTEGRATIONS, integrationById, type Integration, type IntegrationCatego
 import { getMyIntegrations, saveIntegration } from "@/lib/integrations.functions";
 import { getMyPresence, setSpotifyPresenceVisible } from "@/lib/presence.functions";
 import { IntegrationVault } from "./IntegrationVault";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const SUGGESTED = ["spotify", "github", "youtube", "bluesky", "wsocial", "lichess", "chesscom", "wakatime"];
 
@@ -83,7 +84,7 @@ export function AddLiveIntegrationModal({ open, onClose }: { open: boolean; onCl
       toast.success(`${item.label} staat op je profiel`);
       close();
     } catch {
-      toast.error("Activeren mislukt");
+      toast.error(trI18n.t("ui.a7e9d75b1d"));
     } finally {
       setBusy(null);
     }

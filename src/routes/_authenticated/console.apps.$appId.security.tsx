@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_authenticated/console/apps/$appId/security")({
   head: () => ({ meta: [{"title": "Security \u2014 ROUT Developer Console"}, {"name": "description", "content": "Manage security for your ROUT application."}, {"property": "og:title", "content": "Security \u2014 ROUT Developer Console"}, {"property": "og:description", "content": "Manage security for your ROUT application."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
@@ -81,7 +82,7 @@ function SecurityPage() {
               try {
                 await remove({ data: { id: app.id } });
                 await qc.invalidateQueries({ queryKey: APPS_KEY });
-                toast.success("App deleted");
+                toast.success(trI18n.t("ui.11132d9e97"));
                 navigate({ to: "/console/apps" });
               } catch (e) {
                 toast.error(errorText(e, "Delete failed."));

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { DEFAULT_RULES, type PresenceRules } from "@/lib/custom-presence";
 import { getCustomPresence, revokePresenceApiKey, rotatePresenceApiKey, savePresenceRules, setMyCustomStatus } from "@/lib/custom-presence.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const QK = ["custom-presence"];
 const DAYS = ["Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za"];
@@ -30,7 +31,7 @@ export function CustomPresencePanel() {
 
   const refresh = () => qc.invalidateQueries({ queryKey: QK });
   const run = async (fn: () => Promise<unknown>, ok: string) => {
-    try { await fn(); toast.success(ok); refresh(); } catch { toast.error("Dat lukte niet. Probeer opnieuw."); }
+    try { await fn(); toast.success(ok); refresh(); } catch { toast.error(trI18n.t("ui.b7ec199ead")); }
   };
   const updateRules = (next: PresenceRules) => { setRules(next); void run(() => save({ data: next }), "Privacyregels bewaard"); };
 
@@ -59,12 +60,12 @@ export function CustomPresencePanel() {
         {newKey && (
           <div className="flex items-center gap-2 rounded-lg bg-muted p-2">
             <code className="min-w-0 flex-1 break-all text-[11px]">{newKey}</code>
-            <Button type="button" size="icon" variant="ghost" aria-label="Kopiëren" onClick={() => { void navigator.clipboard.writeText(newKey); toast.success("Gekopieerd"); }}><Copy className="h-4 w-4" /></Button>
+            <Button type="button" size="icon" variant="ghost" aria-label="Kopiëren" onClick={() => { void navigator.clipboard.writeText(newKey); toast.success(trI18n.t("ui.d0954ac4f4")); }}><Copy className="h-4 w-4" /></Button>
           </div>
         )}
         {newKey && <p className="text-xs text-muted-foreground">Bewaar deze sleutel nu: je ziet hem maar één keer.</p>}
         <div className="flex gap-2">
-          <Button type="button" size="sm" variant="outline" onClick={async () => { try { const r = await rotate(); setNewKey(r.key); refresh(); } catch { toast.error("Dat lukte niet."); } }}>{q.data?.hasKey ? "Nieuwe sleutel" : "Sleutel aanmaken"}</Button>
+          <Button type="button" size="sm" variant="outline" onClick={async () => { try { const r = await rotate(); setNewKey(r.key); refresh(); } catch { toast.error(trI18n.t("ui.12f7bc2c65")); } }}>{q.data?.hasKey ? "Nieuwe sleutel" : "Sleutel aanmaken"}</Button>
           {q.data?.hasKey && <Button type="button" size="sm" variant="ghost" onClick={() => { setNewKey(null); void run(() => revoke(), "Sleutel ingetrokken"); }}>Intrekken</Button>}
         </div>
       </div>

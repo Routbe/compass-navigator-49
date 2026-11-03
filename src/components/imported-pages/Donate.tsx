@@ -19,6 +19,7 @@ import {
 } from "@/lib/donations.functions";
 import type { BadgeNameFormat, BadgeType } from "@/lib/profile-display";
 import { sanitizeHandleInput } from "@/lib/validations/sanitizeHandle";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Target = Awaited<ReturnType<typeof getDonationTarget>>;
 
@@ -89,7 +90,7 @@ export default function Donate() {
 
   const submit = async () => {
     if (effectiveCents < 100) {
-      toast.error("Minimum is €1.");
+      toast.error(trI18n.t("ui.a0060d5bab"));
       return;
     }
     setSubmitting(true);
