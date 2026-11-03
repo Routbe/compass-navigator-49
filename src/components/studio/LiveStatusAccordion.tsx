@@ -8,12 +8,26 @@ import { ChevronDown } from "lucide-react";
 import { LiveIntegrations, useLiveIntegrationCount } from "@/components/studio/LiveIntegrations";
 import type { ProfileDisplayPrefs } from "@/lib/profile-display";
 import { Switch } from "@/components/ui/switch";
+import { PresenceComposer } from "@/components/qa/PresenceComposer";
+import type { ProfileBlock } from "@/lib/profile";
+import type { ReactNode } from "react";
 
 type SetPref = <K extends keyof ProfileDisplayPrefs>(key: K, value: ProfileDisplayPrefs[K]) => void;
 
-/** 💬 Live Status & Gedachten: status indicator + status bericht. */
-export function LiveStatusAccordion({ prefs, setPref }: { prefs: ProfileDisplayPrefs; setPref: SetPref }) {
-  const { t, locale } = useI18n();
+type Composer = { owner: string; handle: string; space: "root" | "alias"; blocks: ProfileBlock[] };
+
+function PresenceBlock({ title, help, children }: { title: string; help: string; children: ReactNode }) {
+  return (
+    <section className="space-y-3 rounded-xl border border-border p-4">
+      <div><h3 className="text-xs font-semibold uppercase tracking-wider">{title}</h3><p className="text-xs text-muted-foreground">{help}</p></div>
+      {children}
+    </section>
+  );
+}
+
+/** Live Presence: three blocks — Indicator (dot), Bericht (bubble), Pulse (24-hour ring + posts). */
+export function LiveStatusAccordion({ prefs, setPref, composer }: { prefs: ProfileDisplayPrefs; setPref: SetPref; composer?: Composer | null }) {
+  const { t } = useI18n();
   useSnapchatCallback();
   return (
     <AccordionItem value="live_status" className="rounded-2xl border border-border bg-card px-4 sm:px-5">
@@ -28,7 +42,21 @@ export function LiveStatusAccordion({ prefs, setPref }: { prefs: ProfileDisplayP
         </span>
       </AccordionTrigger>
       <AccordionContent className="pb-5">
-        <StatusContentSettings prefs={prefs} setPref={setPref} bare />
+        <div className="space-y-3">
+          <PresenceBlock title={t("studio.live.indicator")} help={t("studio.live.indicatorHelp")}>
+            <StatusContentSettings prefs={prefs} setPref={setPref} bare part="indicator" />
+          </PresenceBlock>
+          <PresenceBlock title={t("studio.live.message")} help={t("studio.live.messageHelp")}>
+            <StatusContentSettings prefs={prefs} setPref={setPref} bare part="message" />
+          </PresenceBlock>
+          <PresenceBlock title={t("studio.live.pulse")} help={t("studio.live.pulseHelp")}>
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm font-medium">{t("studio.live.pulseRing")}</p>
+              <Switch aria-label={t("studio.live.pulseRing")} checked={prefs.pulseRing} onCheckedChange={(value) => setPref("pulseRing", value)} />
+            </div>
+            {composer && <PresenceComposer {...composer} />}
+          </PresenceBlock>
+        </div>
         <div className="mt-5 space-y-4 border-t border-border pt-4">
           {([['steamPresence', 'studio.effects.steam', 'studio.effects.steamHelp'], ['lastfmPresence', 'studio.effects.lastfm', 'studio.effects.lastfmHelp']] as const).map(([key, title, help]) => (
             <div key={key} className="flex items-start justify-between gap-4">
