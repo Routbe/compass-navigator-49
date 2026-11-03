@@ -263,5 +263,18 @@
   "save.explain.conflict": "Je profiel werd ondertussen elders aangepast. We nemen de nieuwste versie over en slaan opnieuw op.",
   "save.explain.network": "Je toestel heeft geen verbinding met ROUT. Controleer je internet.",
   "save.explain.unknown": "Er ging onverwacht iets mis bij het opslaan.",
-  "save.noConnection": "geen verbinding"
+  "save.noConnection": "geen verbinding",
+  "docs.skip": "Naar de inhoud",
+  "docs.closeNav": "Sluit navigatie",
+  "docs.openNav": "Open navigatie",
+  "docs.search": "Zoek documentatie…",
+  "docs.noResults": "Geen artikelen gevonden.",
+  "docs.title": "ROUT DOCUMENTATIE",
+  "docs.overview": "Overzicht",
+  "docs.tagline": "Identiteit op jouw voorwaarden.",
+  "docs.updated": "Bijgewerkt",
+  "docs.previous": "Vorige",
+  "docs.next": "Volgende",
+  "docs.onThisPage": "Op deze pagina",
+  "nav.signIn": "Inloggen"
 }

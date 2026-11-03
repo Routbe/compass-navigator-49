@@ -263,5 +263,18 @@
   "save.explain.conflict": "Dein Profil wurde inzwischen an anderer Stelle geändert. Wir übernehmen die neueste Version und speichern erneut.",
   "save.explain.network": "Dein Gerät hat keine Verbindung zu ROUT. Prüfe dein Internet.",
   "save.explain.unknown": "Beim Speichern ist unerwartet etwas schiefgelaufen.",
-  "save.noConnection": "keine Verbindung"
+  "save.noConnection": "keine Verbindung",
+  "docs.skip": "Zum Inhalt",
+  "docs.closeNav": "Navigation schließen",
+  "docs.openNav": "Navigation öffnen",
+  "docs.search": "Dokumentation durchsuchen…",
+  "docs.noResults": "Keine Artikel gefunden.",
+  "docs.title": "ROUT-DOKUMENTATION",
+  "docs.overview": "Übersicht",
+  "docs.tagline": "Identität zu deinen Bedingungen.",
+  "docs.updated": "Aktualisiert",
+  "docs.previous": "Zurück",
+  "docs.next": "Weiter",
+  "docs.onThisPage": "Auf dieser Seite",
+  "nav.signIn": "Anmelden"
 }

@@ -263,5 +263,18 @@
   "save.explain.conflict": "Ton profil a été modifié ailleurs entre-temps. Nous reprenons la version la plus récente et réenregistrons.",
   "save.explain.network": "Ton appareil n’est pas connecté à ROUT. Vérifie ta connexion internet.",
   "save.explain.unknown": "Une erreur inattendue s’est produite lors de l’enregistrement.",
-  "save.noConnection": "pas de connexion"
+  "save.noConnection": "pas de connexion",
+  "docs.skip": "Aller au contenu",
+  "docs.closeNav": "Fermer la navigation",
+  "docs.openNav": "Ouvrir la navigation",
+  "docs.search": "Rechercher dans la documentation…",
+  "docs.noResults": "Aucun article trouvé.",
+  "docs.title": "DOCUMENTATION ROUT",
+  "docs.overview": "Aperçu",
+  "docs.tagline": "L’identité selon tes conditions.",
+  "docs.updated": "Mis à jour",
+  "docs.previous": "Précédent",
+  "docs.next": "Suivant",
+  "docs.onThisPage": "Sur cette page",
+  "nav.signIn": "Se connecter"
 }

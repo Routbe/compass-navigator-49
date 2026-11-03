@@ -35,6 +35,7 @@ import { contextBadge, contextLinks, GLOBAL_ACCOUNT_LINK } from "@/lib/context-m
  * Account context only. Platform tools live in the burger menu so the two
  * surfaces never duplicate each other.
  */
+import { i18n as trI18n } from "@/lib/i18n";
 export function ProfileMenu() {
   const { data: wsCtx } = useWorkspaceContext();
   const devTools = canUseDeveloperTools(wsCtx?.activeRole ?? null);
@@ -106,7 +107,7 @@ export function ProfileMenu() {
     if (pathname.startsWith("/auth") || pathname.startsWith("/login")) return null;
     return (
       <Button asChild size="sm">
-        <Link to="/auth/sign-in">Sign in</Link>
+        <Link to="/auth/sign-in">{trI18n.t("nav.signIn")}</Link>
       </Button>
     );
   }

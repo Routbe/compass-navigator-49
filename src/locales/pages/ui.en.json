@@ -263,5 +263,18 @@
   "save.explain.conflict": "Your profile was changed elsewhere in the meantime. We take the newest version and save again.",
   "save.explain.network": "Your device has no connection to ROUT. Check your internet.",
   "save.explain.unknown": "Something unexpectedly went wrong while saving.",
-  "save.noConnection": "no connection"
+  "save.noConnection": "no connection",
+  "docs.skip": "Skip to content",
+  "docs.closeNav": "Close navigation",
+  "docs.openNav": "Open navigation",
+  "docs.search": "Search documentation…",
+  "docs.noResults": "No articles found.",
+  "docs.title": "ROUT DOCUMENTATION",
+  "docs.overview": "Overview",
+  "docs.tagline": "Identity on your terms.",
+  "docs.updated": "Updated",
+  "docs.previous": "Previous",
+  "docs.next": "Next",
+  "docs.onThisPage": "On this page",
+  "nav.signIn": "Sign in"
 }
