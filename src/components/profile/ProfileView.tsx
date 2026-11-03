@@ -413,7 +413,7 @@ export function ProfileView({
           indicator={prefs.presenceIndicator}
           emoji={prefs.presenceEmoji}
         >
-          <QaStoryRing handle={qaSpace ? profile.username ?? null : null} space={qaSpace ?? "root"} displayName={profile.display_name ?? null} avatarUrl={profile.avatar_url ?? null}>
+          <QaStoryRing enabled={prefs.pulseRing} shapeClassName={avatarShape.className} shapeStyle={avatarShape.style} handle={qaSpace ? profile.username ?? null : null} space={qaSpace ?? "root"} displayName={profile.display_name ?? null} avatarUrl={profile.avatar_url ?? null}>
           {avatarSrc ? (
             <img
               src={avatarSrc}

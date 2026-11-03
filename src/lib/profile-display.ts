@@ -175,6 +175,8 @@ export interface ProfileDisplayPrefs {
   steamPresence: boolean;
   /** Last.fm "now playing" card on the profile (opt-in). */
   lastfmPresence: boolean;
+  /** Live Presence → Pulse: green 24-hour ring around the avatar (on by default). */
+  pulseRing: boolean;
   /** Laser border / live aura effects on live cards. */
   cardEffects: boolean;
   badgeType: BadgeType;
@@ -286,6 +288,7 @@ export const DEFAULT_DISPLAY_PREFS: ProfileDisplayPrefs = {
   guestbookEnabled: false,
   steamPresence: false,
   lastfmPresence: false,
+  pulseRing: true,
   cardEffects: false,
   badgeType: "verified",
   badgeNameFormat: "full",
@@ -491,6 +494,7 @@ export function parseDisplayPrefs(raw: unknown): ProfileDisplayPrefs {
     guestbookEnabled: r["guestbookEnabled"] === true,
     steamPresence: r["steamPresence"] === true,
     lastfmPresence: r["lastfmPresence"] === true,
+    pulseRing: r["pulseRing"] !== false,
     cardEffects: r["cardEffects"] === true,
     badgeType: oneOf(r["badgeType"], ["verified", "human", "domain", "influencer", "none"] as const, "verified"),
     badgeNameFormat: oneOf(r["badgeNameFormat"], ["full", "initials", "lower"] as const, "full"),

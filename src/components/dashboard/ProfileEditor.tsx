@@ -1,6 +1,5 @@
 import { StudioToggleCard } from "@/components/studio/StudioToggleCard";
 import { useI18n } from "@/lib/i18n";
-import { PresenceComposer } from "@/components/qa/PresenceComposer";
 import { FeedbackPanel } from "@/components/studio/FeedbackPanel";
 import { FediverseProfileField } from "@/components/dashboard/FediverseProfileField";
 import { EventsPanel } from "@/components/studio/EventsPanel";
@@ -1203,7 +1202,7 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
                 savedAt={savedAt}
               />
 
-              <LiveStatusAccordion prefs={prefs} setPref={setPref} />
+              <LiveStatusAccordion prefs={prefs} setPref={setPref} composer={!isWorkspace && user ? { owner: user.id, handle: normalized || handle, space: alias ? "alias" : "root", blocks } : null} />
 
               <ProfileContentAccordion
                 cardEffects={prefs.cardEffects}
@@ -1231,7 +1230,6 @@ export function ProfileEditor({ variant = "verified", pageMode = "profile", onPa
                   }
                 }}
               >
-                {!isWorkspace && user && <PresenceComposer owner={user.id} handle={normalized || handle} space={alias ? "alias" : "root"} blocks={blocks} />}
                 {!isWorkspace && (
                   <QuestionsInboxAccordion
                     space={alias ? "alias" : "root"}

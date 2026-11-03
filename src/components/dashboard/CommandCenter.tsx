@@ -26,6 +26,7 @@ import {
   QrCode,
   RefreshCw,
   ShieldCheck,
+  Radio,
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { QaInbox } from "@/components/qa/QaInbox";
@@ -39,6 +40,11 @@ import { getCommandCenter, type ChronosEvent, type ChronosKind, type CommandCent
 import { useLocalFirst } from "@/lib/local-first/useLocalFirst";
 import { useRelayStore } from "@/lib/local-first/useRelayStore";
 import { plural } from "@/lib/plural";
+import { getQuickPresence, setQuickPresence, type QuickPresence } from "@/lib/live-presence.functions";
+import { PRESENCE_DEFS } from "@/lib/avatar-decorations";
+import { PresenceComposer } from "@/components/qa/PresenceComposer";
+import { Input } from "@/components/ui/input";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 
 const KIND_ICON: Record<ChronosKind, typeof Inbox> = {
@@ -377,8 +383,72 @@ function SystemPulse({ items }: { items: { label: string; to: string }[] }) {
   );
 }
 
-type WidgetId = "relays" | "hub" | "qr" | "inbox" | "agenda" | "social" | "qa";
+/** Live Presence quick controls: Indicator, Bericht and Pulse — published instantly. */
+function LivePresenceWidget({ userId }: { userId: string }) {
+  const load = useServerFn(getQuickPresence);
+  const save = useServerFn(setQuickPresence);
+  const qc = useQueryClient();
+  const key = ["quick-presence", userId];
+  const q = useQuery({ queryKey: key, queryFn: () => load() });
+  const [line, setLine] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const d = q.data;
+  const apply = async (patch: Partial<QuickPresence>) => {
+    if (!d) return;
+    setBusy(true);
+    try {
+      const next = await save({ data: { presence: d.presence, statusLine: d.statusLine, pulseRing: d.pulseRing, ...patch } });
+      qc.setQueryData(key, { ...d, ...next });
+      setLine(null);
+      toast.success("Live Presence bijgewerkt");
+    } catch {
+      toast.error("Opslaan mislukt. Probeer opnieuw.");
+    } finally {
+      setBusy(false);
+    }
+  };
+  const value = line ?? d?.statusLine ?? "";
+  return (
+    <Widget icon={Radio} eyebrow="Live Presence" title="Je status" hint="Wijzigingen staan meteen live op je profiel.">
+      {!d ? (
+        <Loader2 className="mt-4 h-4 w-4 animate-spin text-muted-foreground" aria-label="Laden" />
+      ) : (
+        <div className="mt-4 space-y-4">
+          <div className="space-y-2">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Indicator</p>
+            <div className="flex flex-wrap gap-2">
+              {PRESENCE_DEFS.map((p) => (
+                <Button key={p.id} type="button" size="sm" variant={d.presence === p.id ? "secondary" : "outline"} aria-pressed={d.presence === p.id} disabled={busy} className="h-8 gap-2 rounded-full text-xs" onClick={() => void apply({ presence: p.id })}>
+                  <span aria-hidden className="h-2.5 w-2.5 rounded-full border border-border" style={{ background: p.color }} />
+                  {p.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+          <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); void apply({ statusLine: value }); }}>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Bericht</p>
+            <div className="flex gap-2">
+              <Input aria-label="Statusbericht" value={value} maxLength={60} placeholder="Bijv. Bored" onChange={(e) => setLine(e.target.value)} className="h-9 text-sm" />
+              <Button type="submit" size="sm" disabled={busy || line === null}>Opslaan</Button>
+            </div>
+          </form>
+          <div className="space-y-2">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Pulse</p>
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-sm">Toon Pulse-ring om avatar</span>
+              <Switch aria-label="Toon Pulse-ring om avatar" checked={d.pulseRing} disabled={busy} onCheckedChange={(v) => void apply({ pulseRing: v })} />
+            </div>
+            {d.handle ? <PresenceComposer owner={userId} handle={d.handle} space="root" blocks={[]} /> : null}
+          </div>
+        </div>
+      )}
+    </Widget>
+  );
+}
+
+type WidgetId = "presence" | "relays" | "hub" | "qr" | "inbox" | "agenda" | "social" | "qa";
 const WIDGET_LABEL: Record<WidgetId, string> = {
+  presence: "Live Presence",
   relays: "Identity Relays",
   hub: "Profiel Hub",
   qr: "Snelle QR",
@@ -510,6 +580,10 @@ export function CommandCenter() {
               <RelayWidget userId={user.id} connectedApps={c?.connectedApps ?? null} />
             </Slot>
           ) : null}
+
+          <Slot id="presence" className="sm:col-span-2" {...slot("presence")}>
+            <LivePresenceWidget userId={user.id} />
+          </Slot>
 
           <Slot id="qr" className="sm:row-span-2" {...slot("qr")}>
             <Widget icon={QrCode} eyebrow="Snelle QR" title="Plak een link" hint="QR maken, kopiëren of downloaden — hier ter plaatse.">
