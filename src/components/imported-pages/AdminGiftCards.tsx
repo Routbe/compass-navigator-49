@@ -11,6 +11,7 @@ import { listGiftShipments, setGiftShipmentStatus } from "@/lib/admin-gift-cards
 import { AppLayout } from "@/components/layout/AppLayout";
 import type { GiftShipmentRow } from "@/lib/admin-gift-cards.server";
 import { IssuePersonalGift } from "@/components/admin/IssuePersonalGift";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const STEP_LABEL: Record<string, string> = {
   pending_print: "Te drukken",
@@ -34,7 +35,7 @@ export default function AdminGiftCards() {
     try {
       setRows((await list({ data: { openOnly } })) as GiftShipmentRow[]);
     } catch {
-      toast.error("Verzendwachtrij kon niet worden geladen.");
+      toast.error(trI18n.t("ui.4ca3b90a07"));
     } finally {
       setLoading(false);
     }
@@ -57,7 +58,7 @@ export default function AdminGiftCards() {
       else toast.error(result.message);
       await load();
     } catch {
-      toast.error("Bijwerken is mislukt.");
+      toast.error(trI18n.t("ui.9affdfbecf"));
     } finally {
       setBusy(null);
     }

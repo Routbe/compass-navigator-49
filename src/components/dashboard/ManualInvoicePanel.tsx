@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { sendManualInvoice } from "@/lib/manual-invoice.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Line {
   id: string;
@@ -42,7 +43,7 @@ export function ManualInvoicePanel() {
       const picked = input.files?.[0];
       if (!picked) return;
       if (picked.size > 4_000_000) {
-        toast.error("Kies een bestand onder 4 MB.");
+        toast.error(trI18n.t("ui.2aefca009a"));
         return;
       }
       const reader = new FileReader();
@@ -57,7 +58,7 @@ export function ManualInvoicePanel() {
 
   const submit = async () => {
     if (title.trim().length < 2) {
-      toast.error("Geef de factuur een titel.");
+      toast.error(trI18n.t("ui.12ee3af692"));
       return;
     }
     setBusy(true);
@@ -91,7 +92,7 @@ export function ManualInvoicePanel() {
       );
     } catch (error) {
       console.error("[factuur] versturen mislukt", error);
-      toast.error("Versturen mislukte. Probeer het later opnieuw.");
+      toast.error(trI18n.t("ui.b5e03701a8"));
     } finally {
       setBusy(false);
     }

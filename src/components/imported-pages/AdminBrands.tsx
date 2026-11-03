@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { listReservedBrandReleases, releaseReservedBrand } from "@/lib/brand-admin.functions";
 import { RESERVED_BRANDS } from "@/lib/reserved-brands";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Release = { term: string; userId: string; email: string | null; username: string | null; evidence: string; createdAt: string };
 
@@ -32,7 +33,7 @@ export default function AdminBrands() {
     setBusy(true);
     try {
       await release({ data: { term, member, evidence } });
-      toast.success("Naam vrijgegeven");
+      toast.success(trI18n.t("ui.4af80110fb"));
       setTerm("");
       setMember("");
       setEvidence("");

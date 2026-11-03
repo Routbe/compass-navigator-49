@@ -18,6 +18,7 @@ import { FormatSelector, QRFormat } from "@/components/FormatSelector";
 import { DPISelector, mmToPx } from "@/components/DPISelector";
 import { getQRBlob, applyFilenameTokens } from "@/lib/qrGenerator";
 import { cn, errorMessage } from "@/lib/utils";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface BatchRow {
   value: string;
@@ -155,7 +156,7 @@ export default function Batch() {
   };
 
   const generate = async () => {
-    if (!rows.length) return toast.error("Add values first");
+    if (!rows.length) return toast.error(trI18n.t("ui.ee2e3caa45"));
     setBusy(true);
     setProgress(0);
     try {

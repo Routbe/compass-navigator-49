@@ -8,6 +8,7 @@ import { INVITE_INTRO, inviteUrl } from "@/lib/invite";
 import { getReferralStats } from "@/lib/referral.functions";
 import { INVITE_TIERS, nextMilestone, type ReferralReward } from "@/lib/referral-rewards";
 import { useI18n } from "@/lib/i18n";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Referral hub — de persoonlijke uitnodigingslink (`rout.be/r/<handle> of /r/u/<alias>`), het
@@ -68,10 +69,10 @@ export function ReferralPanel() {
     try {
       await navigator.clipboard.writeText(link);
       setCopied(true);
-      toast.success("Link gekopieerd!", { description: link });
+      toast.success(trI18n.t("ui.7e435785d1"), { description: link });
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      toast.error("Kopiëren mislukt — selecteer de link handmatig.");
+      toast.error(trI18n.t("ui.2b98f5f127"));
     }
   };
 

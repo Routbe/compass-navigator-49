@@ -17,6 +17,7 @@ import {
 } from "@/lib/verification-requests.functions";
 import { VerifyUserDialog } from "@/components/admin/VerifyUserDialog";
 import { AppLayout } from "@/components/layout/AppLayout";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const FOLDERS = [
   { id: "pending", label: "Ingediend" },
@@ -85,7 +86,7 @@ export default function AdminVerificationRequests() {
         ...(b as Row[]).map((row) => ({ kind: "business" as const, row })),
       ].sort((a, z) => text(z.row, "created_at").localeCompare(text(a.row, "created_at"))));
     } catch {
-      toast.error("Kon de inbox niet laden.");
+      toast.error(trI18n.t("ui.d964a2a930"));
     }
   }, [listBusiness, listInfluencer, folder]);
 
@@ -157,15 +158,15 @@ export default function AdminVerificationRequests() {
                   const res = await approve({ data: { kind: selected.kind, requestId: text(selected.row, "id"), handles } });
                   if (!res.ok) toast.error(res.reason);
                   else { toast.success(`Goedgekeurd: ${res.approved.join(", ")}`); setSelectedId(null); await refresh(); }
-                } catch { toast.error("Goedkeuren mislukt."); } finally { setBusy(false); }
+                } catch { toast.error(trI18n.t("ui.318ec21b17")); } finally { setBusy(false); }
               }}
               onReject={async (note) => {
                 setBusy(true);
                 try {
                   const data = { requestId: text(selected.row, "id"), approve: false, note: note || null };
                   await (selected.kind === "business" ? reviewBusiness({ data }) : reviewInfluencer({ data }));
-                  toast.success("Afgewezen"); setSelectedId(null); await refresh();
-                } catch { toast.error("Afwijzen mislukt."); } finally { setBusy(false); }
+                  toast.success(trI18n.t("ui.911a1fe853")); setSelectedId(null); await refresh();
+                } catch { toast.error(trI18n.t("ui.7bf4a45792")); } finally { setBusy(false); }
               }}
             />
           ) : (
@@ -251,7 +252,7 @@ function PersonPanel() {
         onSubmit={async (e) => {
           e.preventDefault();
           try { setAccount(await find({ data: { query } })); setSearched(true); }
-          catch { toast.error("Zoeken mislukt."); }
+          catch { toast.error(trI18n.t("ui.bc6ea5d2d1")); }
         }}
       >
         <Input placeholder="E-mail of @handle" value={query} onChange={(e) => setQuery(e.target.value)} />

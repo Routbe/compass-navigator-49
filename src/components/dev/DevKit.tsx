@@ -16,6 +16,7 @@ import { createApiKey, listApiKeys, revokeApiKey } from "@/lib/api-keys.function
 import { Check, Globe, KeyRound, Loader2, Lock, Play, Plus, Terminal, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Copy } from "lucide-react";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const FALLBACK_ORIGIN = "https://rout.be";
 
@@ -556,7 +557,7 @@ export function ApiKeysPanel({
                         aria-label={`Revoke ${row.name}`}
                         onClick={async () => {
                           await revokeApiKey({ data: { id: row.id } });
-                          toast.success("Key revoked");
+                          toast.success(trI18n.t("ui.05d7aa7002"));
                           await load();
                         }}
                       >
@@ -597,7 +598,7 @@ export function EndpointList({
               className="ml-auto text-muted-foreground hover:text-foreground"
               onClick={() => {
                 void navigator.clipboard.writeText(`${base}${path}`);
-                toast.success("Endpoint copied");
+                toast.success(trI18n.t("ui.308eddda64"));
               }}
             >
               <Copy className="h-3.5 w-3.5" />

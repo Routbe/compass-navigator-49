@@ -16,6 +16,7 @@ import {
   saveOAuthClient,
 } from "@/lib/oauth/console.functions";
 import { findSharedRedirects } from "@/lib/oauth/shared-redirects";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type ClientRow = {
   id: string;
@@ -199,7 +200,7 @@ export function OAuthConsole() {
       const result = (await withStepUp(() => rotate({ data: { id: row.id } }))) as { clientSecret: string };
       setSecret({ clientId: row.clientId, value: result.clientSecret });
       setRevealed(true);
-      toast.success("Nieuwe sleutel gemaakt — kopieer hem nu, hij wordt niet opnieuw getoond.");
+      toast.success(trI18n.t("ui.e277863460"));
     } catch (error) {
       toast.error((error as Error).message || "Roteren lukte niet");
     } finally {
@@ -211,7 +212,7 @@ export function OAuthConsole() {
     if (!window.confirm(`"${row.name}" definitief verwijderen?`)) return;
     await remove({ data: { id: row.id } });
     await refresh();
-    toast.success("App verwijderd");
+    toast.success(trI18n.t("ui.d7fe6d5ee2"));
   }
 
   return (
@@ -246,7 +247,7 @@ export function OAuthConsole() {
               variant="outline"
               onClick={() => {
                 void navigator.clipboard.writeText(secret.value);
-                toast.success("Gekopieerd");
+                toast.success(trI18n.t("ui.d0954ac4f4"));
               }}
             >
               <Copy className="h-4 w-4" />

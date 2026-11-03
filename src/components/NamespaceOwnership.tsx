@@ -1,6 +1,7 @@
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
 import { profileLabels } from "@/lib/app-domains";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * One handle, two namespaces. Shows that a member owns both
@@ -24,7 +25,7 @@ export function NamespaceOwnership({ handle }: { handle: string }) {
             className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
             onClick={() => {
               void navigator.clipboard.writeText(url);
-              toast.success("Link copied!");
+              toast.success(trI18n.t("ui.88fe9d214a"));
             }}
           >
             <Copy className="h-3.5 w-3.5" aria-hidden />

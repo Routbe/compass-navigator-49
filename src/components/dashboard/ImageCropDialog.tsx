@@ -4,6 +4,7 @@ import { RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Snijdt bij, draait en comprimeert in de browser naar WebP (max `maxWidth` px breed). */
 async function renderCrop(src: string, area: Area, rotation: number, maxWidth: number): Promise<Blob> {
@@ -58,7 +59,7 @@ export function ImageCropDialog({
     <Dialog open={!!src} onOpenChange={(o) => !o && onCancel()}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>Afbeelding bijsnijden</DialogTitle>
+          <DialogTitle>{trI18n.t("ui.dbf99d1535")}</DialogTitle>
         </DialogHeader>
         <div className="relative h-72 overflow-hidden rounded-xl bg-muted">
           {src && (
@@ -73,7 +74,7 @@ export function ImageCropDialog({
           </Button>
         </div>
         <DialogFooter>
-          <Button variant="ghost" onClick={onCancel}>Annuleren</Button>
+          <Button variant="ghost" onClick={onCancel}>{trI18n.t("ui.c2fbda4ee9")}</Button>
           <Button
             disabled={!area || busy}
             onClick={async () => {

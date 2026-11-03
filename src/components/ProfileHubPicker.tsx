@@ -11,6 +11,7 @@ import { ProfileQrDesignContext } from "@/lib/qr-design-bridge";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { HANDLE_MIN_LENGTH, handleIssue, normalizeHandle, profilePath } from "@/lib/profile";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Props {
   values: Record<string, string>;
@@ -43,7 +44,7 @@ export function ProfileHubPicker({ values, onChange }: Props) {
       await saveQr({ data: design });
       await queryClient.invalidateQueries({ predicate: query => query.queryKey.some(key => typeof key === "string" && /profile|studio|draft/.test(key)) });
       setSaved(true);
-      toast.success("Profiel-QR opgeslagen");
+      toast.success(trI18n.t("ui.f54132e830"));
       setTimeout(() => setSaved(false), 2500);
     } catch (err) {
       toast.error(`Opslaan mislukt: ${err instanceof Error ? err.message : "onbekende fout"}`);

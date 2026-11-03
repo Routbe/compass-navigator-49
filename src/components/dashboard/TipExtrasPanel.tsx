@@ -17,6 +17,7 @@ import {
   type TipMethod,
   type TipSocialSource,
 } from "@/lib/tip-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Extras = { methods: TipMethod[]; externalLinks: ExternalTipLink[]; socialSource: TipSocialSource };
 
@@ -75,7 +76,7 @@ function ExternalLinksEditor({ links, onChange }: { links: ExternalTipLink[]; on
   const free = (Object.keys(EXTERNAL_TIP_CATALOG) as ExternalTipKind[]).filter((k) => !links.some((l) => l.kind === k));
   const add = () => {
     const clean = cleanExternalValue(kind, value);
-    if (!clean) return toast.error("Vul een geldige gebruikersnaam of link in.");
+    if (!clean) return toast.error(trI18n.t("ui.5e927b0167"));
     onChange([...links, { kind, value: clean }]);
     setValue("");
     const nextFree = free.find((k) => k !== kind);
@@ -138,7 +139,7 @@ function SocialPhotosEditor({ source, onChange }: { source: TipSocialSource; onC
     if (!res?.ok) return toast.error(res && !res.ok ? res.message : "Ophalen mislukt");
     setImages(res.images);
     onChange({ network, handle: handle.replace(/^@/, ""), mode, picked });
-    if (res.images.length === 0) toast.message("Geen openbare foto's gevonden die we veilig kunnen tonen.");
+    if (res.images.length === 0) toast.message(trI18n.t("ui.bab879099a"));
   };
 
   return (

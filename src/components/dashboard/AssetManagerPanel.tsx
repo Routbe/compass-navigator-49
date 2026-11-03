@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { deleteMyAsset, getActiveScopeStorage, getMyAssetUrl, listMyAssets, uploadMyAsset } from "@/lib/assets.functions";
 import { LIFETIME_MAX_BYTES, LIFETIME_MAX_FILES } from "@/lib/asset-retention";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const mb = (b: number) => `${Math.round(b / 1024 / 1024)} MB`;
 
@@ -52,7 +53,7 @@ export function AssetManagerPanel() {
     setBusy(true);
     try {
       await upload({ data: { fileName: file.name, base64: await toBase64(file), days: Number(days) } });
-      toast.success("Bestand geüpload");
+      toast.success(trI18n.t("ui.428098b9ea"));
       await qc.invalidateQueries({ queryKey: ["my-assets"] });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Upload mislukt");
@@ -74,7 +75,7 @@ export function AssetManagerPanel() {
   async function onDelete(id: string) {
     try {
       await remove({ data: { id } });
-      toast.success("Bestand verwijderd");
+      toast.success(trI18n.t("ui.88b8922029"));
       await qc.invalidateQueries({ queryKey: ["my-assets"] });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Verwijderen mislukt");
@@ -178,7 +179,7 @@ export function AssetManagerPanel() {
                   onClick={() =>
                     withUrl(a.id, (url) => {
                       void navigator.clipboard.writeText(url);
-                      toast.success("Tijdelijke link gekopieerd (1 uur geldig)");
+                      toast.success(trI18n.t("ui.ec5659696b"));
                     })
                   }
                 >

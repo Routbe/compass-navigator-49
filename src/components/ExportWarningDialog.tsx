@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { AlertTriangle, Lightbulb, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ExportRiskReport } from "@/lib/scanability";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface ExportWarningDialogProps {
   open: boolean;
@@ -87,9 +88,9 @@ export function ExportWarningDialog({
 
         <AlertDialogFooter className="gap-2 sm:gap-2">
           <Button variant="ghost" onClick={onDownloadAnyway}>
-            Download anyway
+            {trI18n.t("ui.42859f749a")}
           </Button>
-          <Button onClick={onFix}>Fix issues</Button>
+          <Button onClick={onFix}>{trI18n.t("ui.f7c650b354")}</Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

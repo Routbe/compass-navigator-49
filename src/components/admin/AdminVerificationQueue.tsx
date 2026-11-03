@@ -29,6 +29,7 @@ import {
   suggestHandlesForBankName,
 } from "@/lib/admin.functions";
 import type { Pending } from "@/types/admin";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export function AdminVerificationQueue({
   allowed,
@@ -144,9 +145,9 @@ export function AdminVerificationQueue({
     try {
       const res = await suggestHandles({ data: { bankName } });
       setBankSuggestions(res.suggestions);
-      if (res.suggestions.length === 0) toast.info("No free handle for that name.");
+      if (res.suggestions.length === 0) toast.info(trI18n.t("ui.86093f89ad"));
     } catch {
-      toast.error("Could not generate handles.");
+      toast.error(trI18n.t("ui.d00588ec3e"));
     }
   };
 

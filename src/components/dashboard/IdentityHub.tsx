@@ -17,6 +17,7 @@ import { useRelayStore } from "@/lib/local-first/useRelayStore";
 import { startPrimaryEmailChange } from "@/lib/auth/email-safety.functions";
 import { bulkUpdateAppEmails, listAppEmails, listConnectedApps, setAppEmail } from "@/lib/oauth/connected-apps.functions";
 import { isPushable, pushableIds, toggleAll, togglePick } from "@/lib/identity-push";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * /dashboard/identity — Identity Relays & Connected Apps.
@@ -78,7 +79,7 @@ export function IdentityHub() {
     setBusy("email");
     try {
       await withStepUp(() => startChange({ data: { email } }));
-      toast.success("Bevestigingsmail verstuurd. Na bevestiging push je het nieuwe adres naar je apps.");
+      toast.success(trI18n.t("ui.6f4a8a3c8b"));
       setEmail("");
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Wijziging geblokkeerd.");
@@ -146,7 +147,7 @@ export function IdentityHub() {
                         aria-label={`Alias van ${r.appName} kopiëren`}
                         onClick={() => {
                           void navigator.clipboard.writeText(r.proxyEmail);
-                          toast.success("Alias gekopieerd.");
+                          toast.success(trI18n.t("ui.23ac7226b8"));
                         }}
                       >
                         <Copy className="h-3 w-3" />

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { notifyError, notifySuccess } from "@/lib/notify";
 import { allowedHandlesFor, type GrantTier } from "@/lib/admin-grant-rules";
 import { adminGrantVerification, adminListUserWorkspaces } from "@/lib/admin-members.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const TIERS: { value: GrantTier; label: string; hint: string }[] = [
   { value: "pro", label: "Pro", hint: "Blauw vinkje, gebruikersnaam op echte naam" },
@@ -83,12 +84,12 @@ export function AdminGrantVerificationDialog({
 
           {tier !== "business" ? (
             <div className="grid grid-cols-2 gap-2">
-              <div><Label htmlFor="g-first">Voornaam</Label><Input id="g-first" value={firstName} onChange={(e) => setFirst(e.target.value)} /></div>
-              <div><Label htmlFor="g-last">Achternaam</Label><Input id="g-last" value={lastName} onChange={(e) => setLast(e.target.value)} /></div>
+              <div><Label htmlFor="g-first">{trI18n.t("ui.5fecc59844")}</Label><Input id="g-first" value={firstName} onChange={(e) => setFirst(e.target.value)} /></div>
+              <div><Label htmlFor="g-last">{trI18n.t("ui.3451206bbd")}</Label><Input id="g-last" value={lastName} onChange={(e) => setLast(e.target.value)} /></div>
             </div>
           ) : (
             <>
-              <div><Label htmlFor="g-domain">Website-domein</Label><Input id="g-domain" placeholder="bakkerij.be" value={domain} onChange={(e) => setDomain(e.target.value)} /></div>
+              <div><Label htmlFor="g-domain">{trI18n.t("ui.d9e9de5d45")}</Label><Input id="g-domain" placeholder="bakkerij.be" value={domain} onChange={(e) => setDomain(e.target.value)} /></div>
               <div>
                 <Label htmlFor="g-ws">Workspace</Label>
                 <select id="g-ws" value={workspaceId} onChange={(e) => setWorkspaceId(e.target.value)}
@@ -117,7 +118,7 @@ export function AdminGrantVerificationDialog({
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={busy}>Annuleren</Button>
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={busy}>{trI18n.t("ui.c2fbda4ee9")}</Button>
           <Button onClick={submit} disabled={busy || !preview.ok}>
             {busy && <Loader2 className="mr-1 h-4 w-4 animate-spin" />}Verifiëren
           </Button>

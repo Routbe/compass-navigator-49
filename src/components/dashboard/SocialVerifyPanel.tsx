@@ -27,6 +27,7 @@ import {
   saveSocialLink,
   verifySocialOwnership,
 } from "@/lib/social-verify.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Studio-paneel voor sociale accounts: toevoegen, eigendom verifiëren via een
@@ -75,7 +76,7 @@ export function SocialVerifyPanel({ handle }: { handle: string }) {
     try {
       const result = await saveSocialLink({ data: { platform, username } });
       if (!result.ok || !result.link) {
-        toast.error("Gebruikersnaam ongeldig");
+        toast.error(trI18n.t("ui.9854f792d0"));
         return;
       }
       replace(result.link);
@@ -95,7 +96,7 @@ export function SocialVerifyPanel({ handle }: { handle: string }) {
         setModalFor(null);
         toast.success(`${PLATFORM_LABEL[link.platform]} geverifieerd`);
       } else if (result.reason === "fetch_failed") {
-        toast.error("We konden het profiel niet ophalen. Probeer het straks opnieuw.");
+        toast.error(trI18n.t("ui.d819e5a219"));
       } else {
         toast.error(`We vonden ${profileUrl} nog niet in je bio.`);
       }
@@ -110,11 +111,11 @@ export function SocialVerifyPanel({ handle }: { handle: string }) {
       const result = await refreshSocialLink({ data: { id: link.id } });
       replace(result.link);
       if (result.reason === "rate_limited") {
-        toast.error("Data is al vernieuwd. Je kan één keer per 24 uur verversen.");
+        toast.error(trI18n.t("ui.3f2f12476a"));
       } else if (result.ok) {
-        toast.success("Volgeraantal vernieuwd");
+        toast.success(trI18n.t("ui.7909a7e6ac"));
       } else {
-        toast.error("Verificatie ingetrokken: de ROUT-link staat niet meer in je bio.");
+        toast.error(trI18n.t("ui.72ec84248a"));
       }
     } finally {
       setBusyId(null);

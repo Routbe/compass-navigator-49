@@ -37,6 +37,7 @@ function relative(iso: string | null, locale: string) {
 }
 
 import { PrivacyBadge } from "@/components/PrivacyBadge";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Booking management, rendered inside the Studio page switcher (Inhoud | Vormgeving | Statistieken). */
 export function BookingStudioPanel() {
@@ -505,9 +506,9 @@ function Exceptions({ data, tz }: { data: Studio; tz: string }) {
   const [f, setF] = useState({ kind: "busy" as "busy" | "free", from: "", to: "", allDay: true, start: "09:00", end: "17:00" });
   const [busy, setBusy] = useState(false);
   const submit = async () => {
-    if (!f.from) return toast.error("Kies een begindatum.");
+    if (!f.from) return toast.error(trI18n.t("ui.c16e693a3f"));
     const to = f.to || f.from;
-    if (to < f.from) return toast.error("De einddatum ligt voor de begindatum.");
+    if (to < f.from) return toast.error(trI18n.t("ui.6e9b6deae4"));
     const endDay = new Date(`${to}T00:00:00Z`); endDay.setUTCDate(endDay.getUTCDate() + 1);
     const startUtc = zonedToUtc(f.from, f.allDay ? "00:00" : f.start, tz);
     const endUtc = f.allDay ? zonedToUtc(endDay.toISOString().slice(0, 10), "00:00", tz) : zonedToUtc(to, f.end, tz);
@@ -515,7 +516,7 @@ function Exceptions({ data, tz }: { data: Studio; tz: string }) {
     const r = await add({ data: { kind: f.kind, startUtc, endUtc } }).catch(() => ({ ok: false as const, reason: "invalid" }));
     setBusy(false);
     if (!r.ok) return toast.error(r.reason === "too_many_overrides" ? "Maximaal 100 uitzonderingen." : "Uitzondering kon niet worden opgeslagen.");
-    toast.success("Uitzondering opgeslagen");
+    toast.success(trI18n.t("ui.07eb7dc02a"));
     setF({ ...f, from: "", to: "" });
     await qc.invalidateQueries({ queryKey: QK });
   };

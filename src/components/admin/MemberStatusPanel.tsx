@@ -9,6 +9,7 @@ import { downloadCsv, toCsv } from "@/lib/csv";
 import { selectTolerant } from "@/lib/optional-columns";
 import { formatDateTime } from "@/lib/format";
 import { useI18n } from "@/lib/i18n";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type MemberRow = {
   id: string;
@@ -121,7 +122,7 @@ export function MemberStatusPanel() {
         .order("created_at", { ascending: false })
         .limit(50);
       if (eErr) {
-        toast.error("Kon badge-historiek niet laden");
+        toast.error(trI18n.t("ui.ccb84075fb"));
         return;
       }
       setEvents((prev) => ({ ...prev, [userId]: (data ?? []) as BadgeEvent[] }));

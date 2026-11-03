@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { bunqOAuthStatus, disconnectBunqOAuth, startBunqOAuth } from "@/lib/bunq-oauth.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Status {
   configured: boolean;
@@ -48,8 +49,8 @@ export function BunqConnectionPanel() {
     if (typeof window === "undefined") return;
     const flag = new URLSearchParams(window.location.search).get("bunq");
     if (!flag) return;
-    if (flag === "linked") toast.success("bunq-account gekoppeld");
-    if (flag === "failed") toast.error("Koppelen met bunq is niet gelukt");
+    if (flag === "linked") toast.success(trI18n.t("ui.2fdadf959c"));
+    if (flag === "failed") toast.error(trI18n.t("ui.437551c725"));
     const url = new URL(window.location.href);
     url.searchParams.delete("bunq");
     window.history.replaceState({}, "", url.toString());
@@ -62,9 +63,9 @@ export function BunqConnectionPanel() {
     try {
       const res = await start();
       if (res.ok && "url" in res) window.location.href = res.url;
-      else toast.error("bunq-koppeling is niet beschikbaar");
+      else toast.error(trI18n.t("ui.78fbc46243"));
     } catch {
-      toast.error("bunq-koppeling starten mislukt");
+      toast.error(trI18n.t("ui.c10f9d0e3d"));
     } finally {
       setBusy(false);
     }
@@ -74,10 +75,10 @@ export function BunqConnectionPanel() {
     setBusy(true);
     try {
       await disconnect();
-      toast.success("bunq-koppeling verbroken");
+      toast.success(trI18n.t("ui.cc305fb467"));
       await refresh();
     } catch {
-      toast.error("Ontkoppelen mislukt");
+      toast.error(trI18n.t("ui.4a49998165"));
     } finally {
       setBusy(false);
     }

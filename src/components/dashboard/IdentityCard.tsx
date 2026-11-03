@@ -18,6 +18,7 @@ import {
 } from "@/lib/profile-url";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Identity card — the member's handle in their chosen URL shape, one tap to
@@ -63,15 +64,15 @@ export function IdentityCard() {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
-      toast.success("Profile link copied");
+      toast.success(trI18n.t("ui.ad2a8e95fd"));
     } catch {
-      toast.error("Copy failed", { description: "Select the link and copy it manually." });
+      toast.error(trI18n.t("ui.bd5acbff63"), { description: "Select the link and copy it manually." });
     }
   };
 
   const pick = async (next: UrlStyle) => {
     const { error } = await save(next);
-    if (error) toast.error("Could not save your preferred link style");
+    if (error) toast.error(trI18n.t("ui.6c3e67f7f7"));
   };
 
   return (

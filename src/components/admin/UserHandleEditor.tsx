@@ -18,6 +18,7 @@ import {
 import { assignAliasHandle, assignHandle } from "@/lib/admin.functions";
 import { strictHandleIssue } from "@/lib/handle-validation";
 import { sanitizeHandleInput } from "@/lib/validations/sanitizeHandle";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Elke gebruiker draagt twee identiteiten:
@@ -81,7 +82,7 @@ export function UserHandleEditor({
   const draftIssue = clean ? strictHandleIssue(clean, { alias: open === "alias" }) : null;
 
   const submit = async () => {
-    if (!clean) return toast.error("Vul eerst een gebruikersnaam in.");
+    if (!clean) return toast.error(trI18n.t("ui.da2709d61e"));
     if (draftIssue && !(open === "verified" && vip)) return toast.error(draftIssue);
     setBusy(true);
     try {

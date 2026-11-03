@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getWorkspaceSettings, setWorkspaceDomain, verifyWorkspaceDomain } from "@/lib/workspaces.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 
@@ -34,7 +35,7 @@ export function WorkspaceDomainPanel({ workspaceId, onVerified }: { workspaceId:
     try {
       await saveDomain({ data: { workspaceId, domain: value.trim() || null } });
       setInput(null);
-      toast.success("Domein opgeslagen — voeg nu het DNS-record toe.");
+      toast.success(trI18n.t("ui.03043a181f"));
       void qc.invalidateQueries({ queryKey: ["workspace-domain", workspaceId] });
     } catch (e) { toast.error(errText(e)); } finally { setBusy(null); }
   }
@@ -48,7 +49,7 @@ export function WorkspaceDomainPanel({ workspaceId, onVerified }: { workspaceId:
         void qc.invalidateQueries({ queryKey: ["workspace-domain", workspaceId] });
         onVerified?.();
       } else {
-        toast.error("DNS-record nog niet gevonden. DNS-propagatie kan even duren.");
+        toast.error(trI18n.t("ui.a47b18c573"));
       }
     } catch (e) { toast.error(errText(e)); } finally { setBusy(null); }
   }
@@ -95,7 +96,7 @@ export function WorkspaceDomainPanel({ workspaceId, onVerified }: { workspaceId:
           <div className="space-y-2 font-mono text-xs">
             <button
               type="button"
-              onClick={() => { void navigator.clipboard.writeText(domain.recordName); toast.success("Gekopieerd"); }}
+              onClick={() => { void navigator.clipboard.writeText(domain.recordName); toast.success(trI18n.t("ui.d0954ac4f4")); }}
               className="flex w-full items-center justify-between gap-2 rounded-lg border border-border bg-muted/40 px-3 py-2 text-left hover:bg-muted"
             >
               <span className="truncate">Naam: {domain.recordName}</span>
@@ -104,7 +105,7 @@ export function WorkspaceDomainPanel({ workspaceId, onVerified }: { workspaceId:
             {domain.recordValue && (
               <button
                 type="button"
-                onClick={() => { void navigator.clipboard.writeText(domain.recordValue!); toast.success("Gekopieerd"); }}
+                onClick={() => { void navigator.clipboard.writeText(domain.recordValue!); toast.success(trI18n.t("ui.d0954ac4f4")); }}
                 className="flex w-full items-center justify-between gap-2 rounded-lg border border-border bg-muted/40 px-3 py-2 text-left hover:bg-muted"
               >
                 <span className="truncate">Waarde: {domain.recordValue}</span>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { errorText, useConsoleApp, useSaveApp, useSaveSettings, type AppPatch, type SettingsPatch } from "./console-data";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Shared hook for console sub-pages: the current app plus a save action with toasts. */
 export function useAppPage(appId: string) {
@@ -12,7 +13,7 @@ export function useAppPage(appId: string) {
     setSaving(true);
     try {
       await save(app, patch);
-      toast.success("Opgeslagen");
+      toast.success(trI18n.t("ui.f0b3057bb6"));
       return true;
     } catch (e) {
       toast.error(errorText(e));
@@ -27,7 +28,7 @@ export function useAppPage(appId: string) {
     setSaving(true);
     try {
       await saveSettings(app, patch);
-      toast.success("Opgeslagen");
+      toast.success(trI18n.t("ui.f0b3057bb6"));
       return true;
     } catch (e) {
       toast.error(errorText(e));

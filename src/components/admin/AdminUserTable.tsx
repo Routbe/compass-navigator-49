@@ -43,6 +43,7 @@ import {
 } from "@/lib/admin.functions";
 import type { UserSegment } from "@/lib/admin-segments";
 import type { BulkAction, Confirmation, UserRow } from "@/types/admin";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export function AdminUserTable({
   allowed,
@@ -169,7 +170,7 @@ export function AdminUserTable({
     try {
       const res = await cleanse({ data: { userId: row.userId, ...payload } });
       if (!res.ok) throw new Error(res.reason);
-      toast.success("Content removed.");
+      toast.success(trI18n.t("ui.a1e384ab57"));
       void refreshUsers();
       void refreshAudit(null);
     } catch (error) {
@@ -233,7 +234,7 @@ export function AdminUserTable({
       void refreshAliases();
       void refreshAudit(null);
     } catch {
-      toast.error("The bulk action could not be completed.");
+      toast.error(trI18n.t("ui.937df3e378"));
     } finally {
       setBusy(null);
       setBulk(null);

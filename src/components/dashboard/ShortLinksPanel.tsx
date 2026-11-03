@@ -18,6 +18,7 @@ import { updateShortLinkTarget } from "@/lib/short-link-edit.functions";
 import { formatDate } from "@/lib/format";
 import { useI18n } from "@/lib/i18n";
 import { paginate } from "@/lib/paginate";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Row {
   id: string;
@@ -74,7 +75,7 @@ export function ShortLinksPanel() {
     try {
       await update({ data: { id: editing.id, targetUrl: url.trim() } });
       setRows((list) => list?.map((r) => (r.id === editing.id ? { ...r, target_url: url.trim() } : r)) ?? null);
-      toast.success("Bestemming bijgewerkt — de short link blijft gelijk");
+      toast.success(trI18n.t("ui.7e3f71eb72"));
       setEditing(null);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Bijwerken is niet gelukt.");
@@ -131,7 +132,7 @@ export function ShortLinksPanel() {
                       aria-label="Kopieer short link"
                       onClick={() => {
                         void navigator.clipboard.writeText(`https://rout.be/s/${r.slug}`);
-                        toast.success("Short link gekopieerd");
+                        toast.success(trI18n.t("ui.b6c02560ee"));
                       }}
                     >
                       <Copy className="h-4 w-4" />

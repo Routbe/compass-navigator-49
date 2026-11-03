@@ -11,6 +11,7 @@ import {
   testAtprotoDid,
 } from "@/lib/subdomain.functions";
 import { cn } from "@/lib/utils";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Health = "idle" | "checking" | "ok" | "fail";
 
@@ -177,7 +178,7 @@ export function BlueskyWizard() {
               disabled={!bareDomain}
               onClick={() => {
                 void navigator.clipboard.writeText(bareDomain);
-                toast.success("Domein gekopieerd!");
+                toast.success(trI18n.t("ui.2c8352ce9a"));
               }}
             >
               <Copy className="mr-1.5 h-3.5 w-3.5" aria-hidden /> Kopieer domein

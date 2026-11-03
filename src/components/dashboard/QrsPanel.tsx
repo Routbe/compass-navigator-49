@@ -45,6 +45,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { updateShortLinkTarget } from "@/lib/short-link-edit.functions";
 import { formatDateTime } from "@/lib/format";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface SavedQR {
   id: string;
@@ -198,7 +199,7 @@ export function QrsPanel() {
     if (!editing) return;
     const url = editUrl.trim();
     if (!/^https:\/\/\S+$/i.test(url)) {
-      toast.error("Voer een geldige URL in die begint met https://");
+      toast.error(trI18n.t("ui.34b44e104b"));
       return;
     }
     setSavingUrl(true);
@@ -209,7 +210,7 @@ export function QrsPanel() {
           r.id === editing.id ? { ...r, target_url: url, updated_at: result.updated_at } : r,
         ),
       );
-      toast.success("Bestemming bijgewerkt — de QR-code en short link blijven gelijk");
+      toast.success(trI18n.t("ui.9a0f45cb5c"));
       setEditing(null);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Bijwerken is niet gelukt.");
@@ -225,7 +226,7 @@ export function QrsPanel() {
     if (error) return toast.error(error.message);
     if (item.kind === "static") setSaved((rows) => rows.filter((r) => r.id !== item.id));
     else setTracked((rows) => rows.filter((r) => r.id !== item.id));
-    toast.success("Deleted");
+    toast.success(trI18n.t("ui.441bda6cd8"));
   };
 
   if (loading) {
@@ -352,7 +353,7 @@ export function QrsPanel() {
                       className="gap-2"
                       onClick={() => {
                         void navigator.clipboard.writeText(item.shortUrl!);
-                        toast.success("Short link copied!");
+                        toast.success(trI18n.t("ui.20a78719da"));
                       }}
                     >
                       <Copy className="h-4 w-4" /> Copy short link

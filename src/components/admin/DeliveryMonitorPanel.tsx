@@ -7,6 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { listInvoiceDeliveries, retryInvoiceDelivery } from "@/lib/admin-delivery.functions";
 import type { DeliveryRow } from "@/lib/admin-delivery.server";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Aflevermonitor: per betaling of de factuur-PDF is aangemaakt en de
@@ -25,7 +26,7 @@ export function DeliveryMonitorPanel() {
     try {
       setRows((await list({ data: { onlyFailed } })) as DeliveryRow[]);
     } catch {
-      toast.error("Aflevermonitor kon niet worden geladen.");
+      toast.error(trI18n.t("ui.d71ea4ca3e"));
     } finally {
       setLoading(false);
     }
@@ -43,7 +44,7 @@ export function DeliveryMonitorPanel() {
       else toast.error(result.message);
       await load();
     } catch {
-      toast.error("Opnieuw versturen is mislukt.");
+      toast.error(trI18n.t("ui.756235bc1b"));
     } finally {
       setBusy(null);
     }

@@ -28,6 +28,7 @@ import {
 import { SHORT_HANDLE_MAX, SHORT_HANDLE_MIN, needsVipGrant } from "@/lib/handle-rules";
 import { strictHandleIssue } from "@/lib/handle-validation";
 import { HandleErrorBanner } from "@/components/HandleValidationMessage";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type SyncStatus = "synced" | "pending" | "failed";
 
@@ -172,7 +173,7 @@ export function AdminVipPanel() {
         };
         setAudit((await loadAudit({ data: payload })) as AuditEntry[]);
       } catch {
-        toast.error("Could not load the VIP audit log.");
+        toast.error(trI18n.t("ui.051f8e6b03"));
       } finally {
         setAuditLoading(false);
       }
@@ -185,7 +186,7 @@ export function AdminVipPanel() {
     try {
       setGrants((await loadGrants()) as Grant[]);
     } catch {
-      toast.error("Could not load VIP grants.");
+      toast.error(trI18n.t("ui.c820dab576"));
     } finally {
       setLoading(false);
     }
@@ -223,9 +224,9 @@ export function AdminVipPanel() {
     try {
       const rows = (await search({ data: { query: term } })) as Candidate[];
       setCandidates(rows);
-      if (rows.length === 0) toast.info("No account matches that search.");
+      if (rows.length === 0) toast.info(trI18n.t("ui.d570c6ce27"));
     } catch {
-      toast.error("Search failed.");
+      toast.error(trI18n.t("ui.19d3cf131f"));
     } finally {
       setSearching(false);
     }
@@ -277,7 +278,7 @@ export function AdminVipPanel() {
       await refresh();
       await refreshAudit(filters);
     } catch {
-      toast.error("Could not allocate this handle.");
+      toast.error(trI18n.t("ui.9e54d4f402"));
     } finally {
       setBusy(null);
     }
@@ -290,7 +291,7 @@ export function AdminVipPanel() {
     );
     if (why === null) return;
     if (why.trim().length < 3) {
-      toast.error("A justification is required.");
+      toast.error(trI18n.t("ui.a149b41741"));
       return;
     }
     setBusy(userId);
@@ -303,11 +304,11 @@ export function AdminVipPanel() {
         toast.error(res.reason ?? "Could not revoke this grant.");
         return;
       }
-      toast.success("VIP grant revoked.");
+      toast.success(trI18n.t("ui.dd76996b71"));
       await refresh();
       await refreshAudit(filters);
     } catch {
-      toast.error("Could not revoke this grant.");
+      toast.error(trI18n.t("ui.93e4e325dd"));
     } finally {
       setBusy(null);
     }
@@ -325,10 +326,10 @@ export function AdminVipPanel() {
         return;
       }
       if (res.error) toast.warning(`Retried — last error: ${res.error}`);
-      else toast.success("Alias sync retried.");
+      else toast.success(trI18n.t("ui.acc65349e5"));
       await refresh();
     } catch {
-      toast.error("Alias sync could not be retried.");
+      toast.error(trI18n.t("ui.7e7cc097f1"));
     } finally {
       setBusy(null);
     }
@@ -352,7 +353,7 @@ export function AdminVipPanel() {
       await refresh();
       await refreshAudit(filters);
     } catch {
-      toast.error("Bulk grant failed.");
+      toast.error(trI18n.t("ui.993f7e6b51"));
     } finally {
       setBulkRunning(false);
     }

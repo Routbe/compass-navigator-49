@@ -10,6 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/hooks/useAuth";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type ClaimHistory = Awaited<ReturnType<typeof getMyRootClaims>>[number];
 type MailDiagnostics = { admin: string; user: string } | null;
@@ -175,7 +176,7 @@ export function SubdomainPanel() {
       };
 
       if (res.status === 401) {
-        toast.error("⚠️ Je sessie is verlopen. Log opnieuw in om een claim in te dienen.");
+        toast.error(trI18n.t("ui.f9c2916783"));
         return;
       }
       if (res.status === 409) {

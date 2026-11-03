@@ -4,6 +4,7 @@ import { Check, Copy, Download, Share2, Video, ContactRound, Link2 } from "lucid
 import { toast } from "sonner";
 import { downloadVCard } from "@/lib/rich-qr";
 import { cardLandingUrl } from "@/lib/card-link";
+import { i18n as trI18n } from "@/lib/i18n";
 
 async function copyText(value: string, message: string) {
   try {
@@ -11,7 +12,7 @@ async function copyText(value: string, message: string) {
     toast.success(message);
     return true;
   } catch {
-    toast.error("Copy failed — your browser blocked clipboard access.");
+    toast.error(trI18n.t("ui.2fe8de63f0"));
     return false;
   }
 }
@@ -135,8 +136,8 @@ export function ContactActionDrawer({ values }: ContactActionDrawerProps) {
           type="button"
           className="h-10 flex-1 gap-2"
           onClick={() => {
-            if (downloadVCard(values)) toast.success("Contact card downloaded (.vcf)");
-            else toast.error("Add a name first");
+            if (downloadVCard(values)) toast.success(trI18n.t("ui.5586350a8d"));
+            else toast.error(trI18n.t("ui.b8198341fb"));
           }}
         >
           <Download className="h-4 w-4" /> Download .vcf

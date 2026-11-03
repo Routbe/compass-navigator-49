@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import type { DotType, CornerSquareType, CornerDotType } from "qr-code-styling";
 import { ARTISTIC_PATTERNS, isArtisticPattern } from "@/lib/artistic-patterns";
 import { PATTERNS, PatternGlyph, type BodyShape } from "./BodyShapeSelector";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface CustomizeShapesModalProps {
   open: boolean;
@@ -174,7 +175,7 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
         className="p-0 sm:max-w-lg sm:rounded-3xl max-sm:top-auto max-sm:bottom-0 max-sm:left-0 max-sm:right-0 max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-t-3xl max-sm:rounded-b-none"
       >
         <DialogHeader className="px-5 pt-5">
-          <DialogTitle id="customize-shapes-title">Customize shapes</DialogTitle>
+          <DialogTitle id="customize-shapes-title">{trI18n.t("ui.35ccb6b556")}</DialogTitle>
           <DialogDescription className="text-xs">
             Control the three sub-layers of the code independently. The finder patterns stay
             mathematically isolated whatever you pick.
@@ -185,7 +186,7 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
           <div className="space-y-4">
             {/* Pattern — the master style for the whole code */}
             <section className="space-y-2">
-              <p className="text-sm font-medium text-foreground">Pattern</p>
+              <p className="text-sm font-medium text-foreground">{trI18n.t("ui.1fff6a3166")}</p>
               <div className="grid grid-cols-5 gap-1.5">
                 {PATTERNS.map((p) => (
                   <Chip
@@ -205,8 +206,8 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
             {/* A — data modules */}
             <section className="space-y-2 border-t border-border/60 pt-4">
               <div>
-                <p className="text-sm font-medium text-foreground">Data modules</p>
-                <p className="text-xs text-muted-foreground">The payload matrix itself.</p>
+                <p className="text-sm font-medium text-foreground">{trI18n.t("ui.6debb3756c")}</p>
+                <p className="text-xs text-muted-foreground">{trI18n.t("ui.563fb4d538")}</p>
               </div>
               <div className="grid grid-cols-5 gap-1.5">
                 {DATA_SHAPES.map((o) => (
@@ -268,8 +269,8 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
             {/* B — outer finder frames */}
             <section className="space-y-2 border-t border-border/60 pt-4">
               <div>
-                <p className="text-sm font-medium text-foreground">Outer finder frames</p>
-                <p className="text-xs text-muted-foreground">The three corner borders.</p>
+                <p className="text-sm font-medium text-foreground">{trI18n.t("ui.5e37b0fd98")}</p>
+                <p className="text-xs text-muted-foreground">{trI18n.t("ui.8f3f1c223e")}</p>
               </div>
               <div className="grid grid-cols-5 gap-1.5">
                 {OUTER_SHAPES.map((o) => (
@@ -288,7 +289,7 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
             {/* C — inner finder dots */}
             <section className="space-y-2 border-t border-border/60 pt-4">
               <div>
-                <p className="text-sm font-medium text-foreground">Inner finder dots</p>
+                <p className="text-sm font-medium text-foreground">{trI18n.t("ui.60ff89055b")}</p>
                 <p className="text-xs text-muted-foreground">
                   The centre square inside each corner.
                 </p>
@@ -310,14 +311,14 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
             {/* Centre slot */}
             <section className="space-y-3 border-t border-border/60 pt-4">
               <div>
-                <p className="text-sm font-medium text-foreground">Centre slot</p>
+                <p className="text-sm font-medium text-foreground">{trI18n.t("ui.8dddc4bc82")}</p>
                 <p className="text-xs text-muted-foreground">
                   Reserved clean zone for a logo or monogram.
                 </p>
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label className="text-xs text-muted-foreground">Slot size</Label>
+                  <Label className="text-xs text-muted-foreground">{trI18n.t("ui.716411e586")}</Label>
                   <span className="font-mono text-xs text-muted-foreground">
                     {Math.round(logoSize * 100)}%
                   </span>
@@ -332,7 +333,7 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label className="text-xs text-muted-foreground">Slot padding</Label>
+                  <Label className="text-xs text-muted-foreground">{trI18n.t("ui.24eae0d0ab")}</Label>
                   <span className="font-mono text-xs text-muted-foreground">{logoMargin}px</span>
                 </div>
                 <Slider
@@ -345,7 +346,7 @@ export function CustomizeShapesModal(props: CustomizeShapesModalProps) {
               </div>
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-xs text-foreground">Hide dots behind logo</Label>
+                  <Label className="text-xs text-foreground">{trI18n.t("ui.18f4efb1f7")}</Label>
                   <p className="text-[11px] text-muted-foreground">
                     Keeps scan reliability at ECC-H.
                   </p>

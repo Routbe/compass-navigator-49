@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { setDomainRootRedirect } from "@/lib/domains.functions";
 import type { RootRedirectType } from "@/lib/root-redirect";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const OPTIONS: { value: RootRedirectType; label: string }[] = [
   { value: "profile_hub", label: "Mijn Profiel Hub (Aanbevolen)" },
@@ -21,7 +22,7 @@ export function DomainRootDestination(props: { id: string; domain: string; type?
     setBusy(true);
     try {
       await setDomainRootRedirect({ data: { id: props.id, type, url: type === "custom_url" ? url : null } });
-      toast.success("Root-bestemming opgeslagen");
+      toast.success(trI18n.t("ui.2f4398c69f"));
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Opslaan mislukt");
     } finally {
