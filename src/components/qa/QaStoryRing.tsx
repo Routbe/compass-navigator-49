@@ -17,7 +17,12 @@ const QaStoryViewer = lazy(() => import("./QaStoryViewer").then((m) => ({ defaul
  * opens the answers as full-screen stories. Without stories it renders the
  * avatar untouched.
  */
-export function QaStoryRing({ handle, space, displayName, avatarUrl, children }: {
+export function QaStoryRing({ handle, space, displayName, avatarUrl, children, enabled = true, shapeClassName = "rounded-full", shapeStyle }: {
+  /** Live Presence → "Toon Pulse-ring om avatar". Off renders the avatar untouched. */
+  enabled?: boolean;
+  /** Matches the avatar shape so the ring never crops a square/rounded avatar into a circle. */
+  shapeClassName?: string;
+  shapeStyle?: Record<string, string>;
   handle: string | null;
   space: QaSpace;
   displayName: string | null;
@@ -72,7 +77,7 @@ export function QaStoryRing({ handle, space, displayName, avatarUrl, children }:
     try { window.localStorage.setItem(seenStorageKey(space, handle), latest); } catch { /* storage blocked */ }
   }, [stories, handle, space]);
 
-  if (!handle || stories.length === 0) return <>{children}</>;
+  if (!enabled || !handle || stories.length === 0) return <>{children}</>;
   const unseen = !seenAt || stories.some(s=>Date.parse(s.createdAt)>Date.parse(seenAt));
   const name = displayName || `@${handle}`;
 
@@ -81,12 +86,13 @@ export function QaStoryRing({ handle, space, displayName, avatarUrl, children }:
       <Button variant="ghost"
         type="button"
         onClick={() => setOpen(true)}
-        className="qa-story-ring relative inline-flex h-auto rounded-full p-[3px] transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className={`qa-story-ring relative inline-flex h-auto ${shapeClassName} p-[3px] transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
+        style={shapeStyle}
         data-seen={unseen ? "false" : "true"}
         aria-label={t("pages.qa.story.open", { name })}
         aria-haspopup="dialog"
       >
-        <span className="inline-flex rounded-full bg-background p-[3px]">{children}</span>
+        <span className={`inline-flex ${shapeClassName} bg-background p-[3px]`} style={shapeStyle}>{children}</span>
       </Button>
       {open && (
         <Suspense fallback={null}>
