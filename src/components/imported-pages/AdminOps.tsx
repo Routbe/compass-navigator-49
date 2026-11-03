@@ -18,6 +18,7 @@ import {
   adminGrantBadge,
   adminRevokeBadge,
 } from "@/lib/admin-ops.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type ShortLink = {
   id: string;
@@ -69,7 +70,7 @@ export default function AdminOps() {
       );
     } catch (e) {
       if (String(e).includes("Forbidden")) setDenied(true);
-      else toast.error("Kon short links niet laden.");
+      else toast.error(trI18n.t("ui.8178a20aed"));
     } finally {
       setLoading(false);
     }
@@ -114,7 +115,7 @@ export default function AdminOps() {
       await updateLink({ data: { id: row.id, isActive: !row.isActive } });
       void refresh();
     } catch {
-      toast.error("Kon status niet wijzigen.");
+      toast.error(trI18n.t("ui.b1c84d0d9b"));
     }
   };
 
@@ -122,10 +123,10 @@ export default function AdminOps() {
     if (!window.confirm(`/${row.slug} en alle scans definitief verwijderen?`)) return;
     try {
       await deleteLink({ data: { id: row.id } });
-      toast.success("Verwijderd");
+      toast.success(trI18n.t("ui.3f3ed9733b"));
       void refresh();
     } catch {
-      toast.error("Verwijderen mislukt.");
+      toast.error(trI18n.t("ui.5998dee145"));
     }
   };
 
@@ -143,7 +144,7 @@ export default function AdminOps() {
         }`,
       }));
     } catch {
-      toast.error("Kon scans niet ophalen.");
+      toast.error(trI18n.t("ui.8510ebbca5"));
     }
   };
 
@@ -151,15 +152,15 @@ export default function AdminOps() {
     if (!window.confirm(`Scanteller van /${row.slug} volledig wissen?`)) return;
     try {
       await purgeScans({ data: { trackedQrId: row.id, olderThanDays: null } });
-      toast.success("Scanteller gewist");
+      toast.success(trI18n.t("ui.80d4c068e2"));
       void refresh();
     } catch {
-      toast.error("Wissen mislukt.");
+      toast.error(trI18n.t("ui.a41fd42990"));
     }
   };
 
   const doGrant = async (revoke: boolean) => {
-    if (!badgeUserId || !badgeSlug) return toast.error("Vul een gebruikers-ID en badge in.");
+    if (!badgeUserId || !badgeSlug) return toast.error(trI18n.t("ui.82ec788616"));
     try {
       const fn = revoke ? revokeBadge : grantBadge;
       await fn({ data: { userId: badgeUserId, badgeSlug } });

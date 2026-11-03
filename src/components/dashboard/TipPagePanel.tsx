@@ -16,6 +16,7 @@ import { TipExtrasPanel } from "@/components/dashboard/TipExtrasPanel";
 import { TIP_TOUR_KEY, TipTour } from "@/components/dashboard/TipTour";
 import { compressToWebp } from "@/lib/image-compress";
 import { STRIPE_FULL_KEY_ERROR, TIP_MAX_IMAGES, checkStripeKey } from "@/lib/tip-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Setup = Awaited<ReturnType<typeof getMyTipSetup>>;
 type Settings = NonNullable<Setup["settings"]>;
@@ -110,7 +111,7 @@ export function TipPagePanel({ onEnabledChange }: { onEnabledChange?: (enabled: 
     setBusy(false);
     if (res?.ok) {
       onEnabledChange?.(s.enabled);
-      toast.success("Steunpagina opgeslagen");
+      toast.success(trI18n.t("ui.142c55609f"));
       void refresh();
     } else toast.error(res && !res.ok ? res.message : "Opslaan mislukt");
   };

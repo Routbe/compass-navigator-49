@@ -15,6 +15,7 @@ import {
 import { decodeCardPayload } from "@/lib/card-link";
 import { downloadVCard } from "@/lib/rich-qr";
 import { toast } from "sonner";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const linkify = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
 
@@ -104,8 +105,8 @@ function CardPage() {
         <Button
           className="mt-6 h-12 w-full gap-2 rounded-full text-base"
           onClick={() => {
-            if (downloadVCard(values)) toast.success("Contact card downloaded");
-            else toast.error("This card has no name to save.");
+            if (downloadVCard(values)) toast.success(trI18n.t("ui.29db8fc1ab"));
+            else toast.error(trI18n.t("ui.a3ef817e9a"));
           }}
         >
           <Download className="h-4 w-4" /> Add to contacts

@@ -19,6 +19,7 @@ import {
   syncFollowersNow,
   updateReachSettings,
 } from "@/lib/total-reach.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Studio-modal "Totaal bereik / volgers tonen": aan/uit, per platform
@@ -46,7 +47,7 @@ export function TotalReachModal({
         setSettings(data);
         setDrafts(Object.fromEntries(data.accounts.map((a) => [a.provider, a.manualCount === null ? "" : String(a.manualCount)])));
       })
-      .catch(() => toast.error("Instellingen konden niet geladen worden"))
+      .catch(() => toast.error(trI18n.t("ui.adcae84eb2")))
       .finally(() => {
         if (active) setLoading(false);
       });
@@ -62,7 +63,7 @@ export function TotalReachModal({
       setSettings(next);
       return next;
     } catch {
-      toast.error("Opslaan mislukt");
+      toast.error(trI18n.t("ui.f678834f2b"));
       return null;
     } finally {
       setBusy(false);
@@ -74,7 +75,7 @@ export function TotalReachModal({
     const manualCount = raw === "" ? null : Math.max(0, Number.parseInt(raw, 10) || 0);
     const current = settings?.accounts.find((a) => a.provider === provider)?.manualCount ?? null;
     if (manualCount === current) return;
-    if (await persist({ accounts: [{ provider, manualCount }] })) toast.success("Aantal opgeslagen");
+    if (await persist({ accounts: [{ provider, manualCount }] })) toast.success(trI18n.t("ui.b1bbb502d7"));
   }
 
   async function handleSync() {
@@ -82,9 +83,9 @@ export function TotalReachModal({
     try {
       const next = await syncFollowersNow();
       setSettings(next);
-      toast.success("Volgeraantallen bijgewerkt");
+      toast.success(trI18n.t("ui.50b17fc5ee"));
     } catch {
-      toast.error("Synchroniseren mislukt");
+      toast.error(trI18n.t("ui.94524eb424"));
     } finally {
       setBusy(false);
     }

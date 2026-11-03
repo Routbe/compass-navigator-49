@@ -14,6 +14,7 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_authenticated/console/apps/$appId/credentials")({
   head: () => ({ meta: [{"title": "Credentials \u2014 ROUT Developer Console"}, {"name": "description", "content": "Manage credentials for your ROUT application."}, {"property": "og:title", "content": "Credentials \u2014 ROUT Developer Console"}, {"property": "og:description", "content": "Manage credentials for your ROUT application."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
@@ -26,7 +27,7 @@ function CopyField({ label, value }: { label: string; value: string }) {
       <p className="mb-1.5 text-xs text-muted-foreground">{label}</p>
       <div className="flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-2">
         <code className="flex-1 break-all text-xs">{value}</code>
-        <button type="button" aria-label={`Kopieer ${label}`} onClick={() => { navigator.clipboard.writeText(value); toast.success("Gekopieerd"); }}>
+        <button type="button" aria-label={`Kopieer ${label}`} onClick={() => { navigator.clipboard.writeText(value); toast.success(trI18n.t("ui.d0954ac4f4")); }}>
           <Copy className="h-4 w-4 text-muted-foreground hover:text-foreground" />
         </button>
       </div>
@@ -101,13 +102,13 @@ function CredentialsPage() {
             <Input className="min-w-0 flex-1" placeholder="https://jouwapp.be/webhooks/rout" value={hookUrl} onChange={(e) => setHookUrl(e.target.value)} />
             <Button disabled={busy || !hookUrl.startsWith("https://")} onClick={async () => {
               setBusy(true);
-              try { setHookSecret((await saveHook({ data: { id: app.id, url: hookUrl.trim() } })).secret); toast.success("Webhook opgeslagen"); }
+              try { setHookSecret((await saveHook({ data: { id: app.id, url: hookUrl.trim() } })).secret); toast.success(trI18n.t("ui.9c4f96217e")); }
               catch (e) { toast.error(errorText(e, "Opslaan mislukt.")); }
               finally { setBusy(false); }
             }}>Opslaan</Button>
             <Button variant="outline" disabled={busy} onClick={async () => {
               setBusy(true);
-              try { await saveHook({ data: { id: app.id, url: null } }); setHookSecret(null); toast.success("Webhook verwijderd"); }
+              try { await saveHook({ data: { id: app.id, url: null } }); setHookSecret(null); toast.success(trI18n.t("ui.ed2795ef50")); }
               catch (e) { toast.error(errorText(e, "Verwijderen mislukt.")); }
               finally { setBusy(false); }
             }}>Verwijderen</Button>

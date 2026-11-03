@@ -36,6 +36,7 @@ import {
   countSvgNodes,
   readHeap,
 } from "@/lib/export-telemetry";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Structured diagnostics attached to a failed export. */
 interface ExportDiagnostics {
@@ -81,7 +82,7 @@ function ExportErrorBody({
           onClick={onRetry}
           className="inline-flex min-h-8 items-center rounded-full border border-current/30 px-2.5 text-[11px] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
-          Retry export
+          {trI18n.t("ui.f58f53ea6b")}
         </button>
       </div>
       {open && (

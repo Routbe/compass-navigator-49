@@ -37,6 +37,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SIGNUP_CONSENT_HEADER, SIGNUP_CONSENT_VERSION, canSubmitSignUp } from "@/lib/signup-consent";
 import { SIGNUP_DOB_HEADER, SIGNUP_PARENT_EMAIL_HEADER, isMinorDob, signupAgeProblem } from "@/lib/minor-safety";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Providers die via Better Auth's generic OAuth/OIDC-plugin lopen. */
 const GENERIC_OAUTH = new Set(["oidc", "infomaniak"]);
@@ -258,7 +259,7 @@ export default function AuthNeon({ initialMode = "magic" }: { initialMode?: Mode
         return;
       }
       setNeedTotp(false);
-      if (minor) toast.success("Account aangemaakt", { description: "We hebben je ouder of voogd een mail gestuurd om toestemming te geven." });
+      if (minor) toast.success(trI18n.t("ui.13f930ec65"), { description: "We hebben je ouder of voogd een mail gestuurd om toestemming te geven." });
       else toast.success(t("auth.ui.toast.welcome"));
       await refresh();
     } finally {

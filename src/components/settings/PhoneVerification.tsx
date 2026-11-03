@@ -11,6 +11,7 @@ import {
   removePhoneNumber,
   requestPhoneVerification,
 } from "@/lib/phone/phone.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const KEY = ["phone-status"];
 const COUNTRIES = ["+32", "+31", "+33", "+49", "+352", "+44"];
@@ -62,7 +63,7 @@ export function PhoneVerification() {
         setManual({ code: r.code, line: r.line });
       } else toast.error(MESSAGES[r.status] ?? "Er ging iets mis.");
     } catch {
-      toast.error("Er ging iets mis.");
+      toast.error(trI18n.t("ui.cbdcf1f424"));
     } finally {
       setBusy(false);
     }
@@ -74,11 +75,11 @@ export function PhoneVerification() {
       const r = await confirm({ data: { code } });
       if (r.status === "verified") {
         setExpiresAt(null);
-        toast.success("Je telefoonnummer is geverifieerd.");
+        toast.success(trI18n.t("ui.2f25f42e16"));
         await qc.invalidateQueries({ queryKey: KEY });
       } else toast.error(MESSAGES[r.status] ?? "Er ging iets mis.");
     } catch {
-      toast.error("Er ging iets mis.");
+      toast.error(trI18n.t("ui.cbdcf1f424"));
     } finally {
       setBusy(false);
     }

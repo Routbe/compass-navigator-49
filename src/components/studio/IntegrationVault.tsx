@@ -22,6 +22,7 @@ import type { BioProvider } from "@/lib/open-web-rules";
 import { VerifyOwnership } from "@/components/studio/VerifyOwnership";
 import { OfficialVerifyButton, hasOfficialVerify } from "@/components/studio/OfficialVerifyButton";
 import { isBioVerifiable } from "@/lib/open-web-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const SPOTIFY_MESSAGES: Record<string, [ok: boolean, text: string]> = {
   connected: [true, "Spotify gekoppeld"],
@@ -105,7 +106,7 @@ export function IntegrationVault({ focus }: { focus?: string } = {}) {
       if (row.verified || !proven) continue;
       if (proven.replace(/^@/, "").toLowerCase() !== row.handle.replace(/^@/, "").toLowerCase()) continue;
       void save({ data: { provider, audience: row.audience, visible: row.visible, useSso: true } }).then((r) => {
-        if (r.ok) { toast.success("Geverifieerd via officiële login"); void refresh(); }
+        if (r.ok) { toast.success(trI18n.t("ui.a6d062a75b")); void refresh(); }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,7 +114,7 @@ export function IntegrationVault({ focus }: { focus?: string } = {}) {
 
   const persist = async (item: Integration, opts: { handle?: string; audience: Audience; visible: boolean; useSso?: boolean; showOnVerified?: boolean; showOnAlias?: boolean }) => {
     if (mine.data && !mine.data.ready) {
-      toast.error("Database-update nodig", { description: "De tabel voor koppelingen bestaat nog niet." });
+      toast.error(trI18n.t("ui.b3560735d4"), { description: "De tabel voor koppelingen bestaat nog niet." });
       return false;
     }
     setBusy(item.id);
@@ -126,7 +127,7 @@ export function IntegrationVault({ focus }: { focus?: string } = {}) {
       await refresh();
       return true;
     } catch {
-      toast.error("Opslaan mislukt");
+      toast.error(trI18n.t("ui.f678834f2b"));
       return false;
     } finally {
       setBusy(null);
@@ -139,7 +140,7 @@ export function IntegrationVault({ focus }: { focus?: string } = {}) {
       return;
     }
     if (item.mode === "oauth") {
-      if (presence.data && !presence.data.spotifyReady) return void toast.error("Spotify is nog niet ingesteld op ROUT");
+      if (presence.data && !presence.data.spotifyReady) return void toast.error(trI18n.t("ui.18bc76a523"));
       window.location.href = "/api/spotify/start";
       return;
     }
@@ -292,7 +293,7 @@ export function IntegrationVault({ focus }: { focus?: string } = {}) {
                           const r = await testSpotify();
                           (r.ok ? toast.success : toast.error)(r.message, { duration: 10000 });
                         } catch {
-                          toast.error("Test mislukt. Probeer opnieuw.");
+                          toast.error(trI18n.t("ui.95bc20d760"));
                         } finally {
                           setBusy(null);
                         }

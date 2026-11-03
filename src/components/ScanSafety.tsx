@@ -10,6 +10,7 @@ import {
 import { analyzeScanability, scanQuality, type ScanReport } from "@/lib/scanability";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export function useScanReport(
   fgColor: string,
@@ -188,7 +189,7 @@ export function ScanSafety({
                     onClick={onAutoFixContrast}
                     className="ml-auto shrink-0 rounded-full bg-foreground px-2.5 py-1 text-[11px] font-medium text-background transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   >
-                    Fix for me
+                    {trI18n.t("ui.b1f40d275e")}
                   </button>
                 )}
               </div>

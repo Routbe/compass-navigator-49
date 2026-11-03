@@ -13,6 +13,7 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_authenticated/console/apps/")({
   head: () => ({ meta: [
@@ -98,7 +99,7 @@ function AppsOverview() {
                 try {
                   await remove({ data: { id: toDelete.id } });
                   await qc.invalidateQueries({ queryKey: APPS_KEY });
-                  toast.success("App verwijderd");
+                  toast.success(trI18n.t("ui.d7fe6d5ee2"));
                 } catch (e) {
                   toast.error(errorText(e, "Verwijderen mislukt."));
                 }

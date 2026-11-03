@@ -20,6 +20,7 @@ import { VerifyOwnership } from "@/components/studio/VerifyOwnership";
 import { OfficialVerifyButton, hasOfficialVerify } from "@/components/studio/OfficialVerifyButton";
 import { isBioVerifiable } from "@/lib/open-web-rules";
 import { CustomPresencePanel } from "@/components/studio/CustomPresencePanel";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Telt de actieve live diensten (Spotify + kluisrijen met live data). */
 export function useLiveIntegrationCount(): number {
@@ -84,7 +85,7 @@ function ReachControl({ provider, settings, busy, onSaved }: {
     try {
       onSaved(await save({ data: { accounts: [{ provider, ...patch }] } }));
     } catch {
-      toast.error("Opslaan mislukt");
+      toast.error(trI18n.t("ui.f678834f2b"));
     }
   };
 
@@ -160,7 +161,7 @@ export function LiveIntegrations() {
     try {
       await fn();
     } catch {
-      toast.error("Opslaan mislukt");
+      toast.error(trI18n.t("ui.f678834f2b"));
     } finally {
       setBusy(null);
     }
@@ -200,7 +201,7 @@ export function LiveIntegrations() {
               onClick={() => void run("spotify", async () => {
                 await unlinkSpotify();
                 await qc.invalidateQueries({ queryKey: ["my-presence"] });
-                toast.success("Spotify ontkoppeld");
+                toast.success(trI18n.t("ui.28735e78d9"));
               })}>
               Ontkoppelen
             </button>
@@ -297,7 +298,7 @@ export function TotalReachToggle() {
       qc.setQueryData(["reach-settings"], next);
       toast.success(ok);
     } catch {
-      toast.error("Opslaan mislukt");
+      toast.error(trI18n.t("ui.f678834f2b"));
     } finally {
       setBusy(false);
     }

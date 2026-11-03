@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { getMyTipSetup, saveMyTipSettings } from "@/lib/tip-page.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Settings overview of extra page types: only an on/off switch and a view link. Content lives in the page's Inhoud tab. */
 export function ExtraPagesPanel({ handle, onTipEnabledChange, qaPath, qaPage, onQaPageChange }: {
@@ -31,7 +32,7 @@ export function ExtraPagesPanel({ handle, onTipEnabledChange, qaPath, qaPage, on
     if (!tip?.settings) return;
     const res = await saveTip({ data: { ...tip.settings, enabled: v } }).catch(() => null);
     if (res?.ok) { setTip({ ...tip, settings: { ...tip.settings, enabled: v } }); onTipEnabledChange?.(v); }
-    else toast.error("Opslaan mislukt");
+    else toast.error(trI18n.t("ui.f678834f2b"));
   }
 
   const rows = [

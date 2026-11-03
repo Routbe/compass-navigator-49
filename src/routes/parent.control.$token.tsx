@@ -7,6 +7,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { approveParentConsent, getParentView, setParentQaLevel } from "@/lib/parent.functions";
 import { QA_LEVELS, QA_LEVEL_LABELS, type QaLevel } from "@/lib/minor-safety";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/parent/control/$token")({
   loader: ({ params }) => getParentView({ data: { token: params.token } }).catch(() => ({ view: null })),
@@ -49,14 +50,14 @@ function ParentControl() {
     setBusy(true);
     try {
       const r = await approve({ data: { token } });
-      if (r.ok) { setConsent("approved"); toast.success("Toestemming gegeven"); } else toast.error("Deze link is verlopen.");
+      if (r.ok) { setConsent("approved"); toast.success(trI18n.t("ui.12693daa2e")); } else toast.error(trI18n.t("ui.f2ddbda143"));
     } finally { setBusy(false); }
   };
   const pick = async (l: QaLevel) => {
     const prev = level;
     setLvl(l);
     const r = await setLevel({ data: { token, level: l } }).catch(() => ({ ok: false }));
-    if (r.ok) toast.success("Instelling opgeslagen"); else { setLvl(prev); toast.error("Niet opgeslagen"); }
+    if (r.ok) toast.success(trI18n.t("ui.7fc72e80f3")); else { setLvl(prev); toast.error(trI18n.t("ui.b7b1d11d92")); }
   };
 
   return (

@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactMessage } from "@/lib/contact.functions";
 import { RoutButtonKit } from "@/components/dev/RoutButtonKit";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Asset = {
   name: string;
@@ -102,7 +103,7 @@ function CopyButton({ value, label }: { value: string; label: string }) {
           setDone(true);
           setTimeout(() => setDone(false), 1500);
         } catch {
-          toast.error("Kopiëren lukte niet.");
+          toast.error(trI18n.t("ui.488990e04e"));
         }
       }}
       className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
@@ -150,7 +151,7 @@ function PressForm() {
       }
       setSent(true);
     } catch {
-      toast.error("Controleer je gegevens en probeer opnieuw.");
+      toast.error(trI18n.t("ui.2482a0b570"));
     } finally {
       setBusy(false);
     }

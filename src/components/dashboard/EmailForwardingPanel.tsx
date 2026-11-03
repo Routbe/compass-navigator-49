@@ -10,6 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { db } from "@/lib/db/client";
 import { getForwardingState, requestForwardingChange } from "@/lib/forwarding.functions";
 import { getMyAccount } from "@/lib/account.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** username@rout.be forwarding configuration — Early Believer / verified members only. */
 export function EmailForwardingPanel() {
@@ -104,7 +105,7 @@ export function EmailForwardingPanel() {
   const save = async () => {
     const value = forwardTo.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      toast.error("Enter a valid destination e-mail address.");
+      toast.error(trI18n.t("ui.28da097e5e"));
       return;
     }
     setSaving(true);
@@ -116,13 +117,13 @@ export function EmailForwardingPanel() {
       .eq("id", user!.id);
     if (error) {
       setSaving(false);
-      toast.error("Could not save the visibility setting.");
+      toast.error(trI18n.t("ui.a5adb735ff"));
       return;
     }
 
     if (!emailChanged && confirmed) {
       setSaving(false);
-      toast.success("Forwarding settings saved.");
+      toast.success(trI18n.t("ui.e267bbda93"));
       return;
     }
 
@@ -168,8 +169,8 @@ export function EmailForwardingPanel() {
       toast.success(`Confirmation re-sent to ${savedEmail}.`);
     } else if (result.ok) {
       setFallback({ url: result.confirmUrl ?? "", error: result.deliveryError ?? null });
-      toast.error("The confirmation e-mail could not be sent yet.");
-    } else toast.error("Could not re-send the confirmation.");
+      toast.error(trI18n.t("ui.28970a512b"));
+    } else toast.error(trI18n.t("ui.5833d0e575"));
   };
 
   return (
@@ -193,7 +194,7 @@ export function EmailForwardingPanel() {
           className="h-8 rounded-lg"
           onClick={() => {
             void navigator.clipboard.writeText(alias);
-            toast.success("Alias copied!");
+            toast.success(trI18n.t("ui.ecd9c25432"));
           }}
         >
           <Copy className="mr-1 h-3 w-3" /> Copy
@@ -214,7 +215,7 @@ export function EmailForwardingPanel() {
               className="h-8 rounded-lg"
               onClick={() => {
                 void navigator.clipboard.writeText(fallback.url);
-                toast.success("Confirmation link copied!");
+                toast.success(trI18n.t("ui.50f60f2463"));
               }}
             >
               <Copy className="mr-1 h-3 w-3" /> Copy confirmation link

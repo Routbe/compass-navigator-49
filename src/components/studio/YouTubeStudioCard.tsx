@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { YouTubeCardView } from "@/components/profile/YouTubeCard";
 import { disconnectYouTubeVault, getMyYouTube, setYouTubeCardVisible } from "@/lib/youtube.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const previewTheme = {
   card: "var(--card)",
@@ -69,10 +70,10 @@ export function YouTubeStudioCard() {
               setBusy(true);
               try {
                 await disconnect();
-                toast.success("YouTube ontkoppeld en tokens gewist");
+                toast.success(trI18n.t("ui.dc2c0a43d8"));
                 await refresh();
               } catch {
-                toast.error("Ontkoppelen mislukt, probeer opnieuw");
+                toast.error(trI18n.t("ui.f9b98397eb"));
               } finally {
                 setBusy(false);
               }

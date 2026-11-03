@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getMyIdentityStatus, startIdentityVerification } from "@/lib/identity/identity.functions";
 import { DIDIT_LIMIT_MESSAGE } from "@/lib/identity/identity-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const RESULT: Record<string, string> = {
   verified: "Je identiteit is geverifieerd.",
@@ -30,7 +31,7 @@ export function IdentityVerification() {
     if (result && result !== "pending" && RESULT[result]) {
       toast[result === "verified" ? "success" : "error"](RESULT[result]);
     } else if (result === "pending") {
-      toast.message("Je scan wordt verwerkt. Dit kan enkele minuten duren.");
+      toast.message(trI18n.t("ui.7bc79e9fcf"));
     }
   }, []);
 

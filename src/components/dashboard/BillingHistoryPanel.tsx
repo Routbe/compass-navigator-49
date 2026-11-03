@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { euro } from "@/lib/profile";
 import { downloadMyInvoice, listMyInvoices } from "@/lib/billing.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Invoice {
   paymentId: string;
@@ -54,7 +55,7 @@ export function BillingHistoryPanel() {
       const res = (await load()) as { invoices: Invoice[] };
       setInvoices(res.invoices ?? []);
     } catch {
-      toast.error("Je facturen konden even niet geladen worden. Probeer het zo opnieuw.");
+      toast.error(trI18n.t("ui.870946db35"));
     } finally {
       setLoading(false);
     }
@@ -72,13 +73,13 @@ export function BillingHistoryPanel() {
     try {
       const res = await download({ data: { paymentId } });
       if (!res.ok || !res.base64) {
-        toast.error("Deze factuur is niet meer beschikbaar.");
+        toast.error(trI18n.t("ui.f839c02e19"));
         return;
       }
       saveBase64Pdf(res.filename, res.base64);
     } catch (err) {
       console.error("[facturen] download mislukt", err);
-      toast.error("Downloaden lukte niet. Probeer het over een moment opnieuw.");
+      toast.error(trI18n.t("ui.8f7ecbfbb9"));
     } finally {
       setBusyId(null);
     }

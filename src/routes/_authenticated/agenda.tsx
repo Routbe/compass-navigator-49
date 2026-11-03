@@ -19,6 +19,7 @@ import {
   type CalendarMode,
   type RoutCalendar,
 } from "@/lib/calendars.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const TITLE = "Agenda & Boekingen";
 const DESC = "Beheer je gekoppelde en soevereine agenda's en boekingspagina's.";
@@ -83,7 +84,7 @@ function AgendaPage() {
                       <span className="block truncate text-sm font-medium">{c.title}</span>
                       <span className="block truncate font-mono text-[11px] text-muted-foreground">{url}</span>
                     </span>
-                    <Button size="icon" variant="ghost" aria-label="Link kopiëren" onClick={() => { void navigator.clipboard.writeText(url); toast.success("Link gekopieerd"); }}>
+                    <Button size="icon" variant="ghost" aria-label="Link kopiëren" onClick={() => { void navigator.clipboard.writeText(url); toast.success(trI18n.t("ui.f3042d3d49")); }}>
                       <Copy className="h-4 w-4" />
                     </Button>
                     <Switch checked={c.isActive} aria-label="Actief" onCheckedChange={async (v) => { await toggle({ data: { id: c.id, active: v } }); void refresh(); }} />
@@ -106,10 +107,10 @@ function AgendaPage() {
             try {
               await create({ data: { title: title.trim(), mode, eventTypeId: eventTypeId || null } });
               setTitle("");
-              toast.success("Agenda aangemaakt");
+              toast.success(trI18n.t("ui.3aec3b646d"));
               void refresh();
             } catch {
-              toast.error("Aanmaken mislukt");
+              toast.error(trI18n.t("ui.2ec5a057cd"));
             } finally {
               setBusy(false);
             }

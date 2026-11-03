@@ -10,6 +10,7 @@ import {
   type WorkspaceSettings as WsSettings,
 } from "@/lib/workspaces.functions";
 import { canManageTeam, workspacePublicPath } from "@/lib/workspace-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const errText = (e: unknown) => (e instanceof Error ? e.message : "Er ging iets mis.");
 
@@ -62,13 +63,13 @@ function AddressForm({ ws, onDone }: { ws: WsSettings; onDone: () => void }) {
     setBusy(true);
     try {
       const res = await claimClean({ data: { workspaceId: ws.id, slug } });
-      toast.success("Workspace-adres bijgewerkt");
+      toast.success(trI18n.t("ui.5911eed0b7"));
       void navigate({ to: "/studio/w/$workspaceSlug/studio", params: { workspaceSlug: res.slug }, replace: true });
     } catch (e) { toast.error(errText(e)); } finally { setBusy(false); }
   }
   async function saveRoot() {
     setBusy(true);
-    try { await claimRoot({ data: { workspaceId: ws.id, slug: root } }); toast.success("Root-adres geclaimd"); onDone(); }
+    try { await claimRoot({ data: { workspaceId: ws.id, slug: root } }); toast.success(trI18n.t("ui.9d268709b2")); onDone(); }
     catch (e) { toast.error(errText(e)); } finally { setBusy(false); }
   }
 
@@ -78,7 +79,7 @@ function AddressForm({ ws, onDone }: { ws: WsSettings; onDone: () => void }) {
     setBusy(true);
     try {
       const res = await renameBase({ data: { workspaceId: ws.id, base } });
-      toast.success("Username bijgewerkt");
+      toast.success(trI18n.t("ui.f8794c2efc"));
       void navigate({ to: "/studio/w/$workspaceSlug/studio", params: { workspaceSlug: res.slug }, replace: true });
     } catch (e) { toast.error(errText(e)); } finally { setBusy(false); }
   }

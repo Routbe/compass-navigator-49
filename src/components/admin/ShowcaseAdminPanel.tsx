@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { listShowcaseHandles, saveShowcaseHandles } from "@/lib/showcase.functions";
 import { PhoneShowcase } from "@/components/home/PhoneShowcase";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Admin: pick which real profiles appear as live examples. */
 export function ShowcaseAdminPanel() {
@@ -22,9 +23,9 @@ export function ShowcaseAdminPanel() {
       const saved = await save({ data: { handles } });
       setText(saved.map((x) => "@" + x).join("\n"));
       setKey((k) => k + 1);
-      toast.success("Live voorbeelden opgeslagen");
+      toast.success(trI18n.t("ui.d96b9b63fe"));
     } catch {
-      toast.error("Opslaan mislukt — controleer de namen (alleen letters, cijfers, . _ -)");
+      toast.error(trI18n.t("ui.218653776b"));
     } finally {
       setBusy(false);
     }

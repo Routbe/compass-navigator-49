@@ -57,6 +57,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { authClient } from "@/lib/auth-client";
 import { LOCALES, LOCALE_LABELS, useI18n } from "@/lib/i18n";
 import { useLanguagePreference } from "@/hooks/useLanguagePreference";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type SettingsTab = "profile" | "security" | "identities" | "payments" | "data" | "status";
 
@@ -169,7 +170,7 @@ export default function AccountSettings() {
     setSavingProfile(false);
     if (!result.ok) return toast.error(result.message ?? "Je profiel kon niet opgeslagen worden.");
     if (profileError) return toast.error(profileError.message);
-    toast.success("Profile saved");
+    toast.success(trI18n.t("ui.e9983dc9ac"));
   };
 
   /** Credentials live in Neon Auth; send the member to the secure account area. */
@@ -179,7 +180,7 @@ export default function AccountSettings() {
     setBusyEmail(true);
     try {
       await withStepUp(() => startEmailChange({ data: { email } }));
-      toast.success("Bevestigingsmail verstuurd. Je oude adres blijft 48 uur beschikbaar voor noodherstel.");
+      toast.success(trI18n.t("ui.9b28393295"));
       setEmail("");
     } catch (e) { toast.error(e instanceof Error ? e.message : "Wijziging geblokkeerd."); }
     finally { setBusyEmail(false); }
@@ -210,7 +211,7 @@ export default function AccountSettings() {
       const ok = await checkSecurityCode({ data: { purpose: "two_factor", code: mfaEmailCode } }).then((r) => r.ok).catch(() => false);
       if (!ok) {
         setMfaBusy(false);
-        return toast.error("Deze code klopt niet of is verlopen.");
+        return toast.error(trI18n.t("ui.2d86b15716"));
       }
     }
     const res = await authClient.twoFactor.enable({ password: mfaPassword || undefined } as never);
@@ -223,7 +224,7 @@ export default function AccountSettings() {
           ? "Dit wachtwoord klopt niet."
           : "Je account heeft een wachtwoord: vul het één keer in om 2FA in te stellen.");
       }
-      if (e.status === 401) return toast.error("Je sessie is verlopen. Log opnieuw in en probeer nog eens.");
+      if (e.status === 401) return toast.error(trI18n.t("ui.336089932f"));
       return toast.error(`Could not start 2FA setup${e.message ? `: ${e.message}` : "."}`);
     }
     setMfaUri(res.data.totpURI);
@@ -237,7 +238,7 @@ export default function AccountSettings() {
     if (res.error) return toast.error(res.error.message ?? "Deze code klopt niet.");
     setMfaEnabled(true);
     setMfaDialogOpen(false);
-    toast.success("Two-factor authentication is on.");
+    toast.success(trI18n.t("ui.89cb23ee63"));
   };
 
   const disable2fa = async () => {
@@ -249,16 +250,16 @@ export default function AccountSettings() {
       password = typed;
     } else {
       const sent = await askSecurityCode({ data: { purpose: "two_factor" } });
-      if (!sent.ok) return toast.error("De code kon niet verstuurd worden.");
+      if (!sent.ok) return toast.error(trI18n.t("ui.b8f81b1cc5"));
       const code = window.prompt(`We stuurden een code naar ${sent.sentTo}. Vul die in om 2FA uit te zetten.`);
       if (!code) return;
       const ok = await checkSecurityCode({ data: { purpose: "two_factor", code } }).then((r) => r.ok).catch(() => false);
-      if (!ok) return toast.error("Deze code klopt niet of is verlopen.");
+      if (!ok) return toast.error(trI18n.t("ui.2d86b15716"));
     }
     const res = await authClient.twoFactor.disable({ password: password || undefined } as never);
     if (res.error) return toast.error(res.error.message ?? "2FA kon niet uitgeschakeld worden.");
     setMfaEnabled(false);
-    toast.success("Two-factor authentication is off.");
+    toast.success(trI18n.t("ui.82418cec7c"));
   };
 
   const signOutOthers = () => openNeonAccount();
@@ -287,9 +288,9 @@ export default function AccountSettings() {
       a.download = `rout-account-data-${user.id}.json`;
       a.click();
       URL.revokeObjectURL(url);
-      toast.success("Export downloaded");
+      toast.success(trI18n.t("ui.2e2c7e279e"));
     } catch {
-      toast.error("Je accountgegevens konden niet geëxporteerd worden.");
+      toast.error(trI18n.t("ui.fff03ac4ba"));
     } finally {
       setExporting(false);
     }

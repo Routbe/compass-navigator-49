@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { exportMyDataFn } from "@/lib/my-data.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Data-portabiliteit: één klik levert een volledig .json-bestand met profiel,
@@ -29,7 +30,7 @@ export function DataExportCard() {
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      toast.success("Je export is gedownload.");
+      toast.success(trI18n.t("ui.1934829d4b"));
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Export mislukt.");
     } finally {

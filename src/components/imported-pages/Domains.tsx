@@ -42,6 +42,7 @@ import {
   DOMAIN_CNAME_TARGET,
   DOMAIN_A_TARGET,
 } from "@/lib/domains.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface DomainRow {
   id: string;
@@ -258,7 +259,7 @@ export default function Domains() {
     try {
       await addCustomDomain({ data: { domain: value } });
       setDomain("");
-      toast.success("Domain added — now create the DNS records below.");
+      toast.success(trI18n.t("ui.02fc552dc0"));
       await load();
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Could not add that domain");
@@ -457,7 +458,7 @@ export default function Domains() {
                         aria-label={`Remove ${row.domain}`}
                         onClick={async () => {
                           await deleteCustomDomain({ data: { id: row.id } });
-                          toast.success("Domain removed");
+                          toast.success(trI18n.t("ui.0123506e5a"));
                           await load();
                         }}
                       >

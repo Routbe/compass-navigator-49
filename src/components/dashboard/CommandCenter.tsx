@@ -46,6 +46,7 @@ import { PresenceComposer } from "@/components/qa/PresenceComposer";
 import { Input } from "@/components/ui/input";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const KIND_ICON: Record<ChronosKind, typeof Inbox> = {
   notification: Inbox,
@@ -180,7 +181,7 @@ function QuickQr() {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      toast.error("Kopiëren lukte niet");
+      toast.error(trI18n.t("ui.348c1acba6"));
     }
   };
   return (
@@ -400,9 +401,9 @@ function LivePresenceWidget({ userId }: { userId: string }) {
       const next = await save({ data: { presence: d.presence, statusLine: d.statusLine, pulseRing: d.pulseRing, ...patch } });
       qc.setQueryData(key, { ...d, ...next });
       setLine(null);
-      toast.success("Live Presence bijgewerkt");
+      toast.success(trI18n.t("ui.3073ecb29a"));
     } catch {
-      toast.error("Opslaan mislukt. Probeer opnieuw.");
+      toast.error(trI18n.t("ui.48dfc582a4"));
     } finally {
       setBusy(false);
     }

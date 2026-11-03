@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { adminOverview } from "@/lib/admin.functions";
 import { euro } from "@/lib/profile";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Overview {
   verifiedUsers: number;
@@ -41,7 +42,7 @@ export function AdminOverviewPanel() {
         const res = (await load()) as Overview;
         if (active) setData(res);
       } catch {
-        toast.error("Overzichtscijfers konden niet geladen worden.");
+        toast.error(trI18n.t("ui.6bebedaf8f"));
       }
     })();
     return () => {

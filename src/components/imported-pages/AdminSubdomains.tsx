@@ -13,6 +13,7 @@ import {
   adminPromoteRootClaim,
   adminResendClaimMail,
 } from "@/lib/subdomain-claims.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Claim = Awaited<ReturnType<typeof adminListRootClaims>>[number];
 type StatusFilter = "all" | "pending_dns" | "active" | "failed_mail";
@@ -83,7 +84,7 @@ export default function AdminSubdomains() {
       const data = await loadClaims({ data: { status, search: search.trim() } });
       setRows((data ?? []) as Claim[]);
     } catch {
-      toast.error("Kon de claim-audit niet laden.");
+      toast.error(trI18n.t("ui.838abd7d53"));
       setRows([]);
     } finally {
       setFetching(false);
@@ -219,10 +220,10 @@ export default function AdminSubdomains() {
                                   setBusy(row.id);
                                   try {
                                     await promote({ data: { userId: row.userId } });
-                                    toast.success("Subdomein geactiveerd.");
+                                    toast.success(trI18n.t("ui.e480772acb"));
                                     await refresh();
                                   } catch {
-                                    toast.error("Activeren mislukt.");
+                                    toast.error(trI18n.t("ui.5d604cfd5a"));
                                   } finally {
                                     setBusy(null);
                                   }
@@ -251,7 +252,7 @@ export default function AdminSubdomains() {
                                     );
                                     await refresh();
                                   } catch {
-                                    toast.error("Verzenden mislukt.");
+                                    toast.error(trI18n.t("ui.0cf235c830"));
                                   } finally {
                                     setBusy(null);
                                   }

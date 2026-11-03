@@ -14,6 +14,7 @@ import {
   verifyCustomDomain,
   claimDomainAsHandle,
 } from "@/lib/domains.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const STATUS_LABEL: Record<string, string> = {
   pending: "Bezig",
@@ -75,8 +76,8 @@ export function CustomDomainPanel() {
 
   function copy(value: string) {
     void navigator.clipboard?.writeText(value).then(
-      () => toast.success("Gekopieerd"),
-      () => toast.error("Kopiëren mislukt"),
+      () => toast.success(trI18n.t("ui.d0954ac4f4")),
+      () => toast.error(trI18n.t("ui.0b1c52dd95")),
     );
   }
 
@@ -87,7 +88,7 @@ export function CustomDomainPanel() {
     try {
       await addCustomDomain({ data: { domain: value } });
       setDomain("");
-      toast.success("Domein toegevoegd — maak nu de DNS-records aan.");
+      toast.success(trI18n.t("ui.e978476e5f"));
       await refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Toevoegen mislukt.");

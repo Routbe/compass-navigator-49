@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type ThemeMode = "auto" | "light" | "dark";
 type Size = "sm" | "md";
@@ -50,10 +51,10 @@ export function VerifiedBadgeCard({
     try {
       await navigator.clipboard.writeText(html);
       setCopied(true);
-      toast.success("Gekopieerd naar je klembord.");
+      toast.success(trI18n.t("ui.e59469ef52"));
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Kopiëren mislukt — selecteer de code handmatig.");
+      toast.error(trI18n.t("ui.106fe2c8f9"));
     }
   }
 

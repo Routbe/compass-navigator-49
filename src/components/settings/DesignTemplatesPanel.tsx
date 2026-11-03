@@ -12,6 +12,7 @@ import {
   renameDesignTemplate,
   saveCurrentDesign,
 } from "@/lib/design-templates.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const KEY = ["design-templates"];
 
@@ -33,7 +34,7 @@ export function DesignTemplatesPanel({ compact = false }: { compact?: boolean } 
       toast.success(ok);
       await qc.invalidateQueries({ queryKey: KEY });
     } catch {
-      toast.error("Er ging iets mis.");
+      toast.error(trI18n.t("ui.cbdcf1f424"));
     } finally {
       setBusy(false);
     }

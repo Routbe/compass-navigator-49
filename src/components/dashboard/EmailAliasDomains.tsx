@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { APP_DOMAINS, aliasAddress, type AppDomain } from "@/lib/app-domains";
 import { getMyEmailAliases, setMyEmailAliases } from "@/lib/email-aliases.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Domain picker for the personal e-mail alias: `handle@rout.be`,
@@ -70,7 +71,7 @@ export function EmailAliasDomains() {
       return;
     }
     setStatuses(Object.fromEntries(result.state.aliases.map((a) => [a.domain, a.status])));
-    toast.success("Alias routing saved.");
+    toast.success(trI18n.t("ui.bb479963e0"));
   };
 
   return (
@@ -119,7 +120,7 @@ export function EmailAliasDomains() {
                 className="h-8 rounded-lg"
                 onClick={() => {
                   void navigator.clipboard.writeText(address);
-                  toast.success("Address copied!");
+                  toast.success(trI18n.t("ui.f6d516c2b3"));
                 }}
               >
                 <Copy className="mr-1 h-3 w-3" /> Copy

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Check, Copy } from "lucide-react";
 import { toast } from "sonner";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface SigData {
   name: string;
@@ -98,10 +99,10 @@ export default function SignaturePage() {
     try {
       await navigator.clipboard.writeText(html);
       setCopied(true);
-      toast.success("Raw HTML gekopieerd — plak in Infomaniak > Handtekening (HTML)");
+      toast.success(trI18n.t("ui.e9bf2a43e9"));
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      toast.error("Kopiëren mislukt — selecteer de code handmatig");
+      toast.error(trI18n.t("ui.87b2ea9c1e"));
     }
   };
 

@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { i18n as trI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_authenticated/console/apps/$appId/publishing")({
   head: () => ({ meta: [{"title": "Publishing \u2014 ROUT Developer Console"}, {"name": "description", "content": "Manage publishing for your ROUT application."}, {"property": "og:title", "content": "Publishing \u2014 ROUT Developer Console"}, {"property": "og:description", "content": "Manage publishing for your ROUT application."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
@@ -170,7 +171,7 @@ function PublishingPage() {
                     setBusy(true);
                     try {
                       await requestBadge({ data: { id: appId, note: note.trim() || undefined } });
-                      toast.success("Verification requested");
+                      toast.success(trI18n.t("ui.13245ee91c"));
                       await qc.invalidateQueries({ queryKey: ["console", "insights", appId] });
                     } catch (err) {
                       toast.error(errorText(err, "Request failed."));

@@ -21,6 +21,7 @@ import {
   type FavoriteKind,
   type ProfileFavorite,
 } from "@/lib/favorites";
+import { i18n as trI18n } from "@/lib/i18n";
 
 interface Props {
   value: ProfileFavorite[];
@@ -49,14 +50,14 @@ export function FavoritesEditor({ value, onChange }: Props) {
 
   const autofill = async (fav: ProfileFavorite) => {
     if (!fav.url) {
-      toast.error("Vul eerst een link in.");
+      toast.error(trI18n.t("ui.0a021ecbd8"));
       return;
     }
     setBusyId(fav.id);
     try {
       const res = await preview({ data: { url: fav.url } });
       if (!res.ok) {
-        toast.error("Deze pagina gaf geen afbeelding terug. Stel zelf een afbeeldingslink in.");
+        toast.error(trI18n.t("ui.7de7dcf8e9"));
         return;
       }
       patch(fav.id, {
@@ -66,7 +67,7 @@ export function FavoritesEditor({ value, onChange }: Props) {
       toast.success(res.imageUrl ? "Afbeelding opgehaald." : "Titel opgehaald.");
     } catch (err) {
       console.error("[favorieten] preview mislukt", err);
-      toast.error("Ophalen lukte niet. Probeer het opnieuw of vul zelf een link in.");
+      toast.error(trI18n.t("ui.62a60e0d3e"));
     } finally {
       setBusyId(null);
     }

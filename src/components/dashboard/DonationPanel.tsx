@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { getMyDonations } from "@/lib/donations.functions";
 import { canonicalHandle, effectiveUrlStyle, type UrlStyle } from "@/lib/profile-url";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const euro = (cents: number) =>
   new Intl.NumberFormat("nl-BE", { style: "currency", currency: "EUR" }).format(cents / 100);
@@ -71,7 +72,7 @@ export function DonationPanel({
           className="gap-1.5"
           onClick={() => {
             void navigator.clipboard.writeText(url);
-            toast.success("Link gekopieerd");
+            toast.success(trI18n.t("ui.f3042d3d49"));
           }}
         >
           <Copy className="h-3.5 w-3.5" /> Kopieer

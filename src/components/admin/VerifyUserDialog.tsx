@@ -16,6 +16,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { setUserVerifiedStatus } from "@/lib/admin-access.functions";
 import { verifiedHandleSuggestionList } from "@/lib/verified-handle";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Handmatige verificatie door een admin: wettelijke voor- en achternaam zijn
@@ -50,7 +51,7 @@ export function VerifyUserDialog({
 
   const submit = async () => {
     if (!first.trim() || !last.trim()) {
-      toast.error("Voor- en achternaam zijn verplicht.");
+      toast.error(trI18n.t("ui.d8122b5991"));
       return;
     }
     setBusy(true);
@@ -78,7 +79,7 @@ export function VerifyUserDialog({
         toast.error(res.error ?? "Verifiëren is mislukt.");
       }
     } catch {
-      toast.error("Verifiëren is mislukt.");
+      toast.error(trI18n.t("ui.0bc633240f"));
     } finally {
       setBusy(false);
     }
@@ -107,7 +108,7 @@ export function VerifyUserDialog({
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="space-y-1">
-              <Label htmlFor="legal-first">Voornaam</Label>
+              <Label htmlFor="legal-first">{trI18n.t("ui.5fecc59844")}</Label>
               <Input
                 id="legal-first"
                 value={first}
@@ -116,7 +117,7 @@ export function VerifyUserDialog({
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="legal-last">Achternaam</Label>
+              <Label htmlFor="legal-last">{trI18n.t("ui.3451206bbd")}</Label>
               <Input
                 id="legal-last"
                 value={last}
@@ -128,7 +129,7 @@ export function VerifyUserDialog({
 
           <div className="flex items-start justify-between gap-4 rounded-xl border border-border p-3">
             <div className="min-w-0">
-              <p className="text-sm font-medium">Gebruikersnaam mee wijzigen</p>
+              <p className="text-sm font-medium">{trI18n.t("ui.2d41ad5763")}</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 Zet de handle automatisch op voornaam.achternaam (volledig uitgeschreven, volgens de
                 gewone handleregels). De volgorde kan achteraf nog aangepast worden.
@@ -147,7 +148,7 @@ export function VerifyUserDialog({
 
           <DialogFooter>
             <Button variant="ghost" onClick={() => setOpen(false)} disabled={busy}>
-              Annuleren
+              {trI18n.t("ui.c2fbda4ee9")}
             </Button>
             <Button onClick={() => void submit()} disabled={busy}>
               {alreadyVerified ? "Opslaan" : "Verifiëren"}

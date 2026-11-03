@@ -7,6 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/hooks/useAuth";
 import { getWallet, startWalletTopupCheckout, updateWalletAutoTopup } from "@/lib/wallet.functions";
 import { WALLET_TOPUP_TIERS_CENTS, type WalletTopupCents } from "@/lib/wallet-tiers";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type WalletData = Awaited<ReturnType<typeof getWallet>>;
 
@@ -54,10 +55,10 @@ export function SecureShieldWalletCard() {
         data: { amountCents, origin: window.location.origin },
       });
       if (result.ok) window.location.href = result.url;
-      else if (result.reason === "parent_approval_sent") toast.success("Aanvraag naar je ouder gestuurd", { description: "Je ouder krijgt een betaallink die 48 uur geldig is." });
-      else toast.error("Opwaarderen mislukt", { description: result.reason });
+      else if (result.reason === "parent_approval_sent") toast.success(trI18n.t("ui.4d824ba002"), { description: "Je ouder krijgt een betaallink die 48 uur geldig is." });
+      else toast.error(trI18n.t("ui.3742bfc849"), { description: result.reason });
     } catch {
-      toast.error("Opwaarderen mislukt");
+      toast.error(trI18n.t("ui.3742bfc849"));
     } finally {
       setBusy(false);
     }
@@ -72,7 +73,7 @@ export function SecureShieldWalletCard() {
       });
       setWallet(next);
     } catch {
-      toast.error("Instelling niet bewaard");
+      toast.error(trI18n.t("ui.16d7d7726c"));
     } finally {
       setBusy(false);
     }

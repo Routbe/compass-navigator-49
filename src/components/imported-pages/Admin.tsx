@@ -109,6 +109,7 @@ import { AdminSettings } from "@/components/admin/AdminSettings";
 import { StatusBadge, SyncBadge, Pager } from "@/components/admin/AdminPrimitives";
 import { adminToastError, shortDate, shortDateTime } from "@/lib/admin-format";
 import type { TxRow, AliasRow, AliasHealth, Confirmation } from "@/types/admin";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Checklist = Awaited<ReturnType<typeof getDeploymentChecklist>>;
 type InboundRow = Awaited<ReturnType<typeof listInboundPayments>>["rows"][number];
@@ -604,7 +605,7 @@ export default function Admin() {
     try {
       const res = await cleanse({ data: { userId: row.userId, ...payload } });
       if (!res.ok) throw new Error(res.reason);
-      toast.success("Content removed.");
+      toast.success(trI18n.t("ui.a1e384ab57"));
       void refreshUsers();
       void refreshAudit(null);
     } catch (error) {
@@ -690,7 +691,7 @@ export default function Admin() {
       void refreshAliases();
       void refreshAudit(null);
     } catch {
-      toast.error("Alias control failed.");
+      toast.error(trI18n.t("ui.0d7cd180a0"));
     } finally {
       setBusy(null);
     }
@@ -701,9 +702,9 @@ export default function Admin() {
     try {
       const res = await suggestHandles({ data: { bankName } });
       setBankSuggestions(res.suggestions);
-      if (res.suggestions.length === 0) toast.info("No free handle for that name.");
+      if (res.suggestions.length === 0) toast.info(trI18n.t("ui.86093f89ad"));
     } catch {
-      toast.error("Could not generate handles.");
+      toast.error(trI18n.t("ui.d00588ec3e"));
     }
   };
 
@@ -771,7 +772,7 @@ export default function Admin() {
       void refreshAliases();
       void refreshAudit(null);
     } catch {
-      toast.error("The bulk action could not be completed.");
+      toast.error(trI18n.t("ui.937df3e378"));
     } finally {
       setBusy(null);
       setBulk(null);
@@ -851,7 +852,7 @@ export default function Admin() {
       void refreshAliases();
       void refreshUsers();
     } catch {
-      toast.error("The sync engine could not be reached.");
+      toast.error(trI18n.t("ui.cf4628129d"));
     } finally {
       setBusy(null);
     }
@@ -898,7 +899,7 @@ export default function Admin() {
       }
 
       if (collected.length === 0) {
-        toast.info("Nothing to export.");
+        toast.info(trI18n.t("ui.cb507beda1"));
         return;
       }
 
@@ -939,7 +940,7 @@ export default function Admin() {
   };
 
   const exportTxCsv = () => {
-    if (tx.length === 0) return toast.info("Nothing to export.");
+    if (tx.length === 0) return toast.info(trI18n.t("ui.cb507beda1"));
     const csv = toCsv(
       tx.map((t) => ({
         timestamp: new Date(t.createdAt).toISOString(),
@@ -1310,7 +1311,7 @@ export default function Admin() {
                         onClick={() => {
                           setAuditViews(saveAuditView(viewName, filters));
                           setViewName("");
-                          toast.success("Filter set saved.");
+                          toast.success(trI18n.t("ui.f69b7e53aa"));
                         }}
                       >
                         Save current filters

@@ -22,6 +22,7 @@ import {
   getMyApprovedHandles,
   claimApprovedHandle,
 } from "@/lib/verification-requests.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Twee rustige, kleine knoppen onder de gewone verificatie:
@@ -75,11 +76,11 @@ export function BusinessInfluencerRequests() {
         toast.error(result.reason ?? "Aanvraag mislukt.");
         return;
       }
-      toast.success("Aanvraag verstuurd. We nemen ze manueel na.");
+      toast.success(trI18n.t("ui.09724f47fd"));
       setOpenBusiness(false);
       setBusiness(await (loadBusiness() as Promise<Row>));
     } catch {
-      toast.error("Aanvraag mislukt. Probeer het later opnieuw.");
+      toast.error(trI18n.t("ui.0d29b74f42"));
     } finally {
       setBusy(false);
     }
@@ -114,7 +115,7 @@ export function BusinessInfluencerRequests() {
       setOpenInfluencer(false);
       setInfluencer(await (loadInfluencer() as Promise<Row>));
     } catch {
-      toast.error("Aanvraag mislukt. Probeer het later opnieuw.");
+      toast.error(trI18n.t("ui.0d29b74f42"));
     } finally {
       setBusy(false);
     }
@@ -273,7 +274,7 @@ function ClaimApprovedHandle() {
             const res = await claim({ data: { handle: choice } });
             if (!res.ok) toast.error(res.reason);
             else { toast.success(`rout.be/${res.handle} is van jou`); setEntries(await list()); }
-          } catch { toast.error("Claimen mislukt."); } finally { setBusy(false); }
+          } catch { toast.error(trI18n.t("ui.369ae34e45")); } finally { setBusy(false); }
         }}
       >
         Naam claimen

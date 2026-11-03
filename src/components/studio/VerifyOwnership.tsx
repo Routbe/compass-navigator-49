@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { useQuery } from "@tanstack/react-query";
 import { checkIntegrationVerify, getMyRoutUsername } from "@/lib/integrations.functions";
 import type { BioProvider } from "@/lib/open-web-rules";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * "Handmatig verifiëren": the member puts their own link rout.be/<username>
@@ -47,7 +48,7 @@ export function VerifyOwnership({
         );
       }
     } catch {
-      toast.error("Controleren lukte niet. Probeer het zo meteen opnieuw.");
+      toast.error(trI18n.t("ui.0592745d21"));
     } finally {
       setBusy(false);
     }
@@ -70,7 +71,7 @@ export function VerifyOwnership({
           <button
             type="button"
             disabled={!username}
-            onClick={() => void navigator.clipboard.writeText(link).then(() => toast.success("Link gekopieerd"))}
+            onClick={() => void navigator.clipboard.writeText(link).then(() => toast.success(trI18n.t("ui.f3042d3d49")))}
             className="flex items-center justify-between gap-2 rounded-lg border border-border bg-muted px-3 py-2 font-mono text-sm"
           >
             {link}

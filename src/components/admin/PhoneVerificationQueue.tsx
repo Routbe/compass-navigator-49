@@ -4,6 +4,7 @@ import { Check, Loader2, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { adminApprovePhoneVerification, adminListPhoneVerifications } from "@/lib/admin-ops.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /** Admin Ops: handmatige goedkeuring van openstaande telefoonverificaties. */
 export function PhoneVerificationQueue() {
@@ -15,8 +16,8 @@ export function PhoneVerificationQueue() {
   async function onApprove(id: string) {
     try {
       const r = await approve({ data: { id } });
-      if (r.ok) toast.success("Telefoonnummer goedgekeurd");
-      else toast.error("Deze aanvraag is verlopen of al afgehandeld.");
+      if (r.ok) toast.success(trI18n.t("ui.bbaa30b19e"));
+      else toast.error(trI18n.t("ui.6538fa3771"));
       await qc.invalidateQueries({ queryKey: ["admin-phone-queue"] });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Goedkeuren mislukt");

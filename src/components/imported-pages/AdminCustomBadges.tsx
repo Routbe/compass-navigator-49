@@ -22,6 +22,7 @@ import {
   adminUploadBadgeImage,
   adminUserCustomBadges,
 } from "@/lib/custom-badges.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 type Badge = Awaited<ReturnType<typeof adminListCustomBadges>>[number];
 type Holder = Awaited<ReturnType<typeof adminListBadgeHolders>>[number];
@@ -114,7 +115,7 @@ function BadgeForm({ initial, onSaved, onCancel }: { initial?: Badge; onSaved: (
           if (!initial) setD(emptyDraft);
           onSaved();
         } catch {
-          toast.error("Opslaan mislukt — controleer de velden");
+          toast.error(trI18n.t("ui.450fac1b34"));
         } finally {
           setBusy(false);
         }
@@ -137,7 +138,7 @@ function BadgeForm({ initial, onSaved, onCancel }: { initial?: Badge; onSaved: (
               const file = e.target.files?.[0];
               e.target.value = "";
               if (!file) return;
-              if (file.size > 2_000_000) return toast.error("Maximaal 2 MB");
+              if (file.size > 2_000_000) return toast.error(trI18n.t("ui.a77905c686"));
               setUploading(true);
               const res = await upload({ data: { base64: await fileToBase64(file) } }).catch(() => null);
               setUploading(false);
@@ -190,7 +191,7 @@ function BadgeForm({ initial, onSaved, onCancel }: { initial?: Badge; onSaved: (
           </div>
           <div>
             <Label htmlFor="cb-url">Website</Label>
-            <Input id="cb-url" value={d.issuerUrl ?? ""} onChange={(e) => set("issuerUrl", txt(e.target.value))} onBlur={() => { try { set("issuerUrl", normalizeBadgeWebsite(d.issuerUrl)); } catch { toast.error("Controleer het websiteadres"); } }} maxLength={300} placeholder="familie.be" />
+            <Input id="cb-url" value={d.issuerUrl ?? ""} onChange={(e) => set("issuerUrl", txt(e.target.value))} onBlur={() => { try { set("issuerUrl", normalizeBadgeWebsite(d.issuerUrl)); } catch { toast.error(trI18n.t("ui.28951ba435")); } }} maxLength={300} placeholder="familie.be" />
           </div>
         </div>
       </div>
@@ -213,7 +214,7 @@ function BadgeDetail({ badge, onBack, onChanged }: { badge: Badge; onBack: () =>
   const [editing, setEditing] = useState(false);
   const [reason, setReason] = useState("");
   const refresh = useCallback(() => {
-    void listHolders({ data: { badgeId: badge.id } }).then(setHolders).catch(() => toast.error("Laden mislukt"));
+    void listHolders({ data: { badgeId: badge.id } }).then(setHolders).catch(() => toast.error(trI18n.t("ui.8f35a7159c")));
   }, [badge.id, listHolders]);
   useEffect(refresh, [refresh]);
 
@@ -225,7 +226,7 @@ function BadgeDetail({ badge, onBack, onChanged }: { badge: Badge; onBack: () =>
       refresh();
       onChanged();
     } catch {
-      toast.error("Mislukt");
+      toast.error(trI18n.t("ui.62beee8b58"));
     }
   };
 
@@ -296,7 +297,7 @@ export default function AdminCustomBadges() {
   const [badges, setBadges] = useState<Badge[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const refresh = useCallback(() => {
-    void list().then(setBadges).catch(() => toast.error("Geen toegang of laden mislukt"));
+    void list().then(setBadges).catch(() => toast.error(trI18n.t("ui.a05109c1b6")));
   }, [list]);
   useEffect(refresh, [refresh]);
   const current = badges.find((b) => b.id === selected) ?? null;

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { disconnectMySnapchat, getMySnapchat, setBitmojiAvatar, updateMySnapchat } from "@/lib/snapchat.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 const MOODS = ["🚗", "💻", "☕", "🎧", "🏋️", "✈️", "😴", "🎉"];
 const FLAGS: Record<string, string> = {
@@ -93,7 +94,7 @@ export function SnapchatPanel() {
                 disabled={!snap.bitmojiUrl}
                 onClick={async () => {
                   const r = await setAvatar();
-                  r.ok ? toast.success("Bitmoji is nu je profielfoto") : toast.error("Geen Bitmoji gevonden");
+                  r.ok ? toast.success(trI18n.t("ui.2d440b3b0a")) : toast.error(trI18n.t("ui.d3f0da91f2"));
                 }}
               >
                 Gebruik als profielfoto
@@ -121,7 +122,7 @@ export function SnapchatPanel() {
             </div>
             <div className="flex gap-2">
               <Input aria-label="Snapchat-status" value={text} maxLength={60} onChange={(e) => setText(e.target.value)} placeholder="Bijv. Onderweg" />
-              <Button size="sm" onClick={async () => { await save({ moodEmoji: emoji, moodText: text }); toast.success("Status opgeslagen"); }}>
+              <Button size="sm" onClick={async () => { await save({ moodEmoji: emoji, moodText: text }); toast.success(trI18n.t("ui.ff50632acd")); }}>
                 Opslaan
               </Button>
             </div>

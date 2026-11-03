@@ -1,3 +1,4 @@
+import { i18n as trI18n } from "@/lib/i18n";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
@@ -589,7 +590,7 @@ export function ApiKeys() {
                         aria-label={`Revoke ${row.name}`}
                         onClick={async () => {
                           await revokeApiKey({ data: { id: row.id } });
-                          toast.success("Key revoked");
+                          toast.success(trI18n.t("ui.05d7aa7002"));
                           await load();
                         }}
                       >
@@ -624,7 +625,7 @@ export default function DeveloperHub() {
 
   const handleCopyOpenApiUrl = () => {
     void navigator.clipboard.writeText(OPENAPI_SPEC_URL);
-    toast.success("URL copied for AI Agent context");
+    toast.success(trI18n.t("ui.48cb18efed"));
   };
 
   const handleDownloadOpenApi = async () => {
@@ -640,7 +641,7 @@ export default function DeveloperHub() {
       a.remove();
       URL.revokeObjectURL(url);
     } catch {
-      toast.error("Could not download the spec");
+      toast.error(trI18n.t("ui.c98e2bbf8c"));
     }
   };
 
@@ -840,7 +841,7 @@ print(create_qr())`,
                           className="ml-auto text-muted-foreground hover:text-foreground"
                           onClick={() => {
                             void navigator.clipboard.writeText(`${base}${path}`);
-                            toast.success("Endpoint copied");
+                            toast.success(trI18n.t("ui.308eddda64"));
                           }}
                         >
                           <Copy className="h-3.5 w-3.5" />

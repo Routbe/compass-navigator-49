@@ -11,6 +11,7 @@ import {
   saveWorkspaceSocial,
   verifyWorkspaceSocialLink,
 } from "@/lib/workspace-social.functions";
+import { i18n as trI18n } from "@/lib/i18n";
 
 /**
  * Claim Mastodon, Bluesky, … accounts for the workspace. Proof: the workspace
@@ -37,7 +38,7 @@ export function WorkspaceSocialPanel({ workspaceId }: { workspaceId: string }) {
       setSlug(r.slug);
       setDomain(r.domain);
     } catch {
-      toast.error("Sociale accounts konden niet laden.");
+      toast.error(trI18n.t("ui.618c56dfa2"));
     } finally {
       setLoading(false);
     }
@@ -48,7 +49,7 @@ export function WorkspaceSocialPanel({ workspaceId }: { workspaceId: string }) {
     setBusy("new");
     const r = await save({ data: { workspaceId, platform, username } }).catch(() => null);
     setBusy(null);
-    if (!r?.ok) return toast.error("Toevoegen mislukt. Controleer de gebruikersnaam.");
+    if (!r?.ok) return toast.error(trI18n.t("ui.84309d6dd2"));
     setUsername("");
     void load();
   }
@@ -56,9 +57,9 @@ export function WorkspaceSocialPanel({ workspaceId }: { workspaceId: string }) {
     setBusy(id);
     const r = await verify({ data: { workspaceId, id } }).catch(() => null);
     setBusy(null);
-    if (r?.ok) toast.success("Geverifieerd voor deze workspace.");
-    else if (r?.reason === "link_missing") toast.error("Link niet gevonden in de bio. Voeg hem toe en probeer opnieuw.");
-    else toast.error("Account kon niet worden opgehaald. Probeer later opnieuw.");
+    if (r?.ok) toast.success(trI18n.t("ui.13f3c3c5f4"));
+    else if (r?.reason === "link_missing") toast.error(trI18n.t("ui.c2db2c4217"));
+    else toast.error(trI18n.t("ui.779b53f805"));
     void load();
   }
   async function del(id: string) {
